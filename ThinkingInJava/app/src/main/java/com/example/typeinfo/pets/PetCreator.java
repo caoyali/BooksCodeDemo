@@ -10,7 +10,8 @@ import java.util.Random;
  */
 public abstract class PetCreator {
     private Random rand = new Random(47);
-    public abstract List<Class <? extends Pet>> types();
+
+    public abstract List<Class<? extends Pet>> types();
 
     public Pet randomPet() {
         int n = rand.nextInt(types().size());
@@ -18,6 +19,7 @@ public abstract class PetCreator {
         try {
             return types().get(n).newInstance();
         } catch (InstantiationException e) {
+            // 为什么throw了 RuntimeException之后就不用在方法处加throws关键字语法了？
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
