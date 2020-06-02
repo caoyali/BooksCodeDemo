@@ -1,9 +1,13 @@
 package com.example.exceptions;
 
+import androidx.annotation.Nullable;
+
 import com.example.util.print.Print;
 
 /**
  * 纸质书 254
+ * e.printStackTrace 会打印getMessage里面得到的东西，getMe把ssage首先会打印 msg内容。
+ * 之后就会对应的栈的前两层打印出来！
  */
 class MyException2 extends Exception {
     private int x;
@@ -19,6 +23,12 @@ class MyException2 extends Exception {
 
     public int val() {
         return x;
+    }
+
+    @Nullable
+    @Override
+    public String getMessage() {
+        return "Detail Message: " + super.getMessage();
     }
 }
 public class ExtraFeatures {
