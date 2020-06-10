@@ -1,5 +1,8 @@
 package com.example.exceptions;
 
+/**
+ * 
+ */
 class VeryImportantException extends Exception {
     @Override
     public String toString() {
