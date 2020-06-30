@@ -14,7 +14,7 @@ class LoggingException extends Exception {
         StringWriter trace = new StringWriter();
         printStackTrace(new PrintWriter(trace));
         logger.severe(trace.toString());
-    }
+    }K
 }
 
 public class LoggingExceptions{
