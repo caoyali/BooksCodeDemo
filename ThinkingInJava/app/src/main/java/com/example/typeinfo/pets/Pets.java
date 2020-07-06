@@ -1,4 +1,4 @@
-package com.example.typeinfo;
+package com.example.typeinfo.pets;
 
 import com.example.typeinfo.pets.LetterPetCreator;
 import com.example.typeinfo.pets.Pet;

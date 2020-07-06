@@ -1,4 +1,4 @@
-package com.example.typeinfo;
+package com.example.typeinfo.pets;
 
 /**
  * 纸质书328页
