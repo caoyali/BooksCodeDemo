@@ -28,10 +28,11 @@ public class SweetShop {
         new Candy();
         Print.print("after create Candy");
         try {
-            // 前面的是文件名字，后面的是类名。，后面的Gum，由于是一个类文件里面的其他类，也不是内部类哈。要找到这个类还是
-            Class.forName("com.example.typeinfo.SweetShop.Gum");
+//             前面是包名字，最后是具体的类名字。 Gum虽然是在SweetShop中写的，但是变成class文件的时候是不在这个文件里面的。
+            Class.forName("com.example.typeinfo.Gum");
+            // forName方法会引发静态资源的加载,但是前提是以前并没有加载过这个类。首次加载的时候就会加载里面的静态资源。
         } catch (ClassNotFoundException e) {
-            Print.print("Could't find Gum");
+            Print.print("Could't find Gum e=" + e);
         }
 
         Print.print("After Class.forName(Gum)");

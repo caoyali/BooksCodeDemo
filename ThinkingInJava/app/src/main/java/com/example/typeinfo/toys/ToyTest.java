@@ -12,7 +12,9 @@ interface WaterPower {};
 
 interface Shoots {};
 
-class Toy {
+interface ShootChild extends Shoots{}
+
+abstract class Toy {
     // Comment out the fllowing default constructor!
     // to see NoSuchMethodError from (*1*)
     Toy() {};
@@ -51,7 +53,7 @@ public class ToyTest {
         Object obj = null;
 
         try{
-            obj = up.newInstance();
+            obj = up.newInstance(); // 得到的数据是一个object
         } catch (InstantiationException ex) {
             Print.print("Cannot instantiate");
             System.exit(1);
