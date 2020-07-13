@@ -30,5 +30,4 @@ public class Staff extends ArrayList<Position> {
         }
     }
 
-
 }
