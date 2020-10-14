@@ -34,6 +34,7 @@ public class AAE_GenericWriting {
 
     static void f2() {
         writeWithWildcard(apples, new Apple());
+//        writeWithWildcard(apples, new Fruit());// 就像描述的公式一样，item必须是list元素指定的子类。这个颠倒了！
         writeWithWildcard(fruits, new Apple());
     }
 
