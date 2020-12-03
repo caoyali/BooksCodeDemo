@@ -38,6 +38,17 @@ Target <|.. Adapter : 被目标用户使用
 ##### uml
 ```puml
 @startuml
-
+interface Target {
+    + request()
+}
+class Adaptee {
+    + SpecificRequest()
+}
+class Adapter {
+    - Adaptee adaptee
+    + request()
+}
+Target <|.. Adapter
+Adaptee <.. Adapter
 @enduml
 ```
