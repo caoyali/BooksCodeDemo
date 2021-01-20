@@ -43,7 +43,7 @@ Abstraction <|-- RefinedAbstraction
 Abstraction o--> Implementor
 
 note left of BriggeTest : 客户类
-note left of Abstraction : 抽象化角色
+note left of Abstraction : 抽象化角色，为什么是一个抽象类而不是接口呢？\n因为抽象类是可以有成员变量的，\n这样的话就可以很好的抽象接口之间的引用关系。
 note bottom of RefinedAbstraction : 扩展抽象化角色
 note bottom of ConcreteImplementorA : 抽象化角色A
 note bottom of ConcreteImplementorB : 抽象化角色B

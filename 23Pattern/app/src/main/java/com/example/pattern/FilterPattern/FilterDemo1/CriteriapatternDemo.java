@@ -13,8 +13,8 @@ class CriteriapatternDemo {
         persons.add(new Person("Mike","Male", "Single"));
         persons.add(new Person("Bobby","Male", "Single"));
 
-        CriteriaMale male = new CriteriaMale();
-        CriteraFamale female = new CriteraFamale();
+        Criteria male = new CriteriaMale();
+        Criteria female = new CriteraFamale();
 
         System.out.println("male=" + male.meetCriteria(persons));
         System.out.println("female=" + female.meetCriteria(persons));
