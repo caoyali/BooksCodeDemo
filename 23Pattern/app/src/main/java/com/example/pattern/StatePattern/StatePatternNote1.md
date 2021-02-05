@@ -3,7 +3,35 @@
 在状态模式中，我们创建表示各种状态的对象，和一个行为随着状态对象改变而改变的context对象。
 ??? context不是上下文吗？怎么还有行为？
 ##### 介绍
-**简介**
+
+#### UML
+```puml
+@startuml
+interface State {
+    + void doAction(Context context);
+}
+
+class StartState {
+    + void doAction(Context context);
+} 
+
+class StopState {
+    + void doAction(Context context);
+}
+
+class Context{
+    + State getState();
+    + void setState();
+}
+
+StartState --up|> State
+StopState --up|> State
+Context --right> State
+
+
+@enduml
+```
+#### 简介
 
 
 ```java
@@ -68,6 +96,8 @@ public class StatePatternDemo{
 }
 ```
 
-State应该是一个接口，context是持有这个接口对象的，那么久意味着，state的实现类都要实现统一的接口。同事，实现接口对Context有依赖关系，会在做操作的时候，最后设置上下文的状态。 反正以我的习惯是不会这样写的。
+State应该是一个接口，context是持有这个接口对象的，那么久意味着，state的实现类都要实现统一的接口。同时，实现接口对Context有依赖关系，会在做操作的时候，最后设置上下文的状态。 反正以我的习惯是不会这样写的。
 
-??? 问题来了， 为什么不让Context 做 doAction() 而是让State去做
+##### 问题来了， 为什么不让Context 做 doAction() 而是让State去做
+
+好吧你可以理解为Context就是用来存储当前状态的。木，就这个作用而已。
