@@ -417,9 +417,11 @@ sunday are closed
 ```
 
 ## 今日高亮显示
-- 标注特殊日期
+#### 标注特殊日期
 ```puml
 @startgantt
+' 按照”天“为单位绘图。
+projectscale daily
 project starts the 2021-03-15
 saturday are closed
 sunday are closed
@@ -432,5 +434,23 @@ today is 30 days after start and is colored in #Aff
 [Foo] happens 40 days after start
 ' 未指明任务的starts关键字，代表的是整个项目的开始。
 [Dummy] lasts 10 days and starts 10 days after start
+
+@endgantt
+
+```
+
+#### 两个里程碑中间定任务
+```puml
+@startgantt
+' 隐藏下方的多余日期布局
+hide footbox
+' 给这个表格起一个标题
+title 起一个名字吧
+project starts 2021-03-15
+[P-start] happens 2021-03-15
+[P-end] happens 2021-04-01
+
+[Task1] occurs from [P-start] to [P-end]
+
 @endgantt
 ```
