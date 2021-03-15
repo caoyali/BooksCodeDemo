@@ -149,6 +149,8 @@ Project starts the 20th of september 2021
 #### 日历颜色
 ```puml
 @startgantt
+saturday are closed
+sunday are closed
 Project starts the 2021/03/10
 2021/03/12 is colored in salmon
 2021/03/15 to 2021/03/18 are colored in lightblue
@@ -213,7 +215,19 @@ Project starts the 2021/03/10
 
 ### 顺序  then， -> 不做多余描述了。都行.
 
-#### 高端使用！资源分配一目了然.谁什么时间段有时间都能看得出来
+### 分割线
+```puml
+@startgantt
+[Task1] lasts 10 days
+then [Task2] lasts 4 days
+-- Phase Two 第二阶段--
+then [Task3] lasts 5 days
+then [Task4] lasts 6 days
+@endgantt
+```
+
+
+### 高端使用！资源分配一目了然.谁什么时间段有时间都能看得出来
 
 ##### 时间精细调整，相对位置，以及谁哪段时间请假，所有的排期都跟着改变
 解决了节假日，倒班日，员工资源， 员工请假等诸多复杂情况下的排期问题
@@ -269,10 +283,154 @@ then [研发调研] on {曹娅丽} lasts 3 days
 '简化语法，指定了顺序。不过这种只是指定顺序而已！更高级的，需要码字
 [产品讨论]->[UI设计]
 
+[音视频] on {刘晨霞} lasts 10 days
+
 [研发项目] on {曹娅丽} lasts 10 days
 
 '这一句是高级语法，解决了不同团队的介入时间问题。
 [研发项目] starts 3 days after [UI设计]'s start 
 {曹娅丽} is off on 2021/03/26 to 2021/03/29
+@endgantt
+```
+## 复杂案例
+
+#### and 操作符， 和延期处理
+and 操作符的应用场景，可以看做所有语句，公用主语[Task name]， 只是把主语抛开之后，以后的语句，用and符号分开而已。并没有那么复杂。
+
+```puml
+@startgantt
+[项目设计] lasts 13 days and is colored in Lavender/LightBlue
+[测试协议] lasts 9 days and is colored in Coral/Green and starts 3 days after [项目设计]'s end
+[书写测试]  lasts 5 days and ends at [项目设计]'s end
+' 先后关系，就像写android 的 constraint layout 一样
+[雇佣测试人员] lasts 6 days and ends at [书写测试]'s start
+[写测试报告] starts 1 day before [测试协议]'s start and ends at [测试协议]'s end and is colored in Coral/Green
+@endgantt
+```
+
+#### 注释，很简单
+' 注释内容
+/'  注释内容 '/ 
+
+#### 添加笔记
+```puml
+@startgantt
+
+[Task1] lasts 20 days
+' 添加一个笔记
+note bottom
+注意事项1
+注意事项2
+注意事项3
+end note
+[Task2] lasts 4 days
+[Task1] -> [Task2]
+--分割线标题--
+[M1] happens  5 days after [Task1]'s end
+
+@endgantt
+```
+
+##### 笔记位置
+```puml
+@startgantt
+
+--test01--
+[task01] lasts 4 days
+note bottom
+' note left
+memo1...
+memo2...
+explanations1
+explanations2
+end note
+
+[Task02] lasts 8 days
+[task01] -> [Task02]
+note bottom
+memo1...
+memo2...
+explanation1...
+wxplanation2...
+end note
+--test02--
+[Task3] as [T3] lasts 7 days
+[T3] -> [T4]
+
+@endgantt
+```
+
+##### 调整任务位于哪一行
+语法：
+[T1] displays on same row as [T2]
+
+里程碑的语法与task的语法一样。只不过主语换成里程碑而已。
+
+```puml
+@startgantt
+Project starts the 2021-03-15
+[TaskA] starts at 2021-03-15 and lasts 3 days
+[TaskB] starts at 2021-03-19 and lasts 3 days
+[TaskB] displays on same row as [TaskA]
+
+[Task01] starts at 2021-03-16 and lasts 4 days
+then [Task02] lasts 8 days
+note bottom
+note for task02
+more notes
+end note
+
+then [task03] lasts 7 days
+note bottom
+note for task03
+more notes
+end note
+
+--separator--
+[taskC] starts 2021-04-01 and lasts 5 days
+[taskD] starts 2021-04-09  and lasts 5 days
+[taskD] displays on same row as [taskC]
+[task10] starts 2020-04-19 and lasts 5 days
+then [task11] lasts 8 days
+note bottom
+笔记
+end note
+
+@endgantt
+```
+
+## 关于延期，暂停任务。
+这个与日历的关闭有稍许不同。这个暂停是与任务绑定的。而日历的关闭，纯属处理节假日。
+
+```puml
+@startgantt
+Project starts the 2021-03-15
+saturday are closed
+sunday are closed
+2021-04-01 is opened
+[Project design] lasts 17 days
+[Project design] pauses on 2021-03-19
+[Project design] pauses on 2021-03-20
+[Project design] pauses on monday
+[Test prototype] starts at [Project design]'s end and lasts 2 weeks
+@endgantt
+```
+
+## 今日高亮显示
+- 标注特殊日期
+```puml
+@startgantt
+project starts the 2021-03-15
+saturday are closed
+sunday are closed
+2021-05-01 to 2021-05-07 are closed
+2021-05-01 to 2021-05-07 are colored in salmon
+2021-05-01 to 2021-05-07 are named [五一劳动节]
+
+today is 30 days after start and is colored in #Aff
+
+[Foo] happens 40 days after start
+' 未指明任务的starts关键字，代表的是整个项目的开始。
+[Dummy] lasts 10 days and starts 10 days after start
 @endgantt
 ```
