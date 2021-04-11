@@ -10,7 +10,6 @@ class SubOperation extends ColOpration{
 
     @Override
     public int operate() {
-        System.out.println(this);
         int r =  a.operate() - b.operate();
         return r;
     }
@@ -18,6 +17,6 @@ class SubOperation extends ColOpration{
     @NonNull
     @Override
     public String toString() {
-        return "(" + a + "+" + b + ")";
+        return "(" + a + "-" + b + ")";
     }
 }

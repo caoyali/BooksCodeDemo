@@ -13,6 +13,6 @@ class AddOperation extends ColOpration{
 
     @Override
     public String toString() {
-        return "(" + a + "-" + b + ")";
+        return "(" + a + "+" + b + ")";
     }
 }

@@ -42,8 +42,9 @@ class InterpreterHelper {
                 i = ind;
             }
         }
-
-        int result = operations.pop().operate();
+        IOperation operation = operations.pop();
+        System.out.println("得到解释器解释：" + operation);
+        int result = operation.operate();
         return result;
     }
 
