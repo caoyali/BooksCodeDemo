@@ -3,6 +3,7 @@
 顿悟思想啊！
 ## thinking
 来来来，看看最最最普通的代码
+首先想一个问题哈！为什么源码有时候放着好好的for each 语句不让你用，偏偏“南辕北辙”似的让你取主动获取一个迭代器，然后自己再进行循环访问呢？
 ```java
 public synchronized void removeCallback(Listener listener){
         if (null == listener) {
