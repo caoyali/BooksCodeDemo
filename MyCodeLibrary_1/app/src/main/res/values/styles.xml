@@ -1,0 +1,40 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!--base-->
+    <style name="single_line">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="bold_single_line" parent="single_line">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="end_single_line" parent="single_line">
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="end_single_line_16" parent="end_single_line">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="fra_answer_card_commit" parent="end_single_line_16">
+        <item name="android:textColor">#FFFFFFFF</item>
+    </style>
+
+    <style name="fra_answer_describe_text" parent="end_single_line_16">
+        <item name="android:textColor">#211F3F</item>
+    </style>
+</resources>

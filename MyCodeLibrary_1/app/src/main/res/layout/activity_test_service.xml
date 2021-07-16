@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/mStopServiceBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="stop service"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/mStartService"
+        app:layout_constraintTop_toTopOf="@+id/mStartService" />
+
+    <Button
+        android:id="@+id/mAidlService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AidlService"
+        app:layout_constraintStart_toStartOf="@+id/mFinish"
+        app:layout_constraintTop_toBottomOf="@+id/mFinish" />
+
+    <Button
+        android:id="@+id/mFinish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="finish"
+        app:layout_constraintBottom_toTopOf="@+id/mAidlService"
+        app:layout_constraintStart_toStartOf="@+id/mBindServer"
+        app:layout_constraintTop_toBottomOf="@+id/mBindServer" />
+
+    <Button
+        android:id="@+id/mUnbindServic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="unBind service"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/mBindServer"
+        app:layout_constraintTop_toBottomOf="@+id/mStopServiceBtn" />
+
+    <Button
+        android:id="@+id/mStartService"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="start service"
+        app:layout_constraintBottom_toTopOf="@+id/mBindServer"
+        app:layout_constraintEnd_toStartOf="@+id/mStopServiceBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/mBindServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bindService"
+        app:layout_constraintStart_toStartOf="@+id/mStartService"
+        app:layout_constraintTop_toTopOf="@+id/mUnbindServic" />
+
+</android.support.constraint.ConstraintLayout>
