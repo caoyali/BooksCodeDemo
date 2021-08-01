@@ -192,18 +192,11 @@ public class ServiceTest extends Service {
 
 **android:enabled**：是否可以被系统实例化，默认为 true因为父标签 也有 enable 属性，所以必须两个都为默认值 true 的情况下服务才会被激活，否则不会激活。
 
-<<<<<<< HEAD
-第一次写一个只有Service的Android项目，原来没有Activity也是可以正常安装的。安装界面如下。挺好的。
-=======
 ###小结总结
 
 整个步骤
 aidl--> aidl实现--> service onBinder吐出--> ServiceConnection捞取。
->>>>>>> efd53b1e9289f440bd6b59485c55377318b6de91
-
 ### 2 Client是我自己的应用，但Service写成一个其他应用的服务，实现案例
-
-
 
 
 ###小结
