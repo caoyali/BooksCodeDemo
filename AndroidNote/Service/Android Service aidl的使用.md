@@ -14,11 +14,10 @@ Android aidl实际上之前只是看别人写过这个，但是自己却没有�
 **aidl接口文件，aidl实现类， Service, ServiceConnection.**
 - 1 **aidl接口文件**，这个文件是必须的。
 - 2 **aidl接口实现类**，里面的xxx.stub指的就是我们常常提到的binder，Binder是一个比较大的知识模块，这个等到深入研究了自然会学到。
-- 3 **Service实现类**， 用于bind时吐出该Service的binder，以便于跨进城
+- 3 **Service实现类**， 用于bind时吐出该Service的binder，以便于跨进程。
 - 4 **ServiceSonnection** 实现类，用于开启Service的所属进程获得Binder实现类的具柄，拿到这个句柄之后就可以开始跨进程干活了。
 
-
-第一次写一个只有Service的Android项目，原来没有Activity也是可以正常安装的。安装界面如下。
+第一次写一个只有Service的Android项目，原来没有Activity也是可以正常安装的。安装界面如下。挺好的。
 
 <a href="https://sm.ms/image/oqcb3tflns2NPDi" target="_blank"><img src="https://i.loli.net/2021/07/17/oqcb3tflns2NPDi.png" width="180" height="320"></a>
 ## 涉及角色描述

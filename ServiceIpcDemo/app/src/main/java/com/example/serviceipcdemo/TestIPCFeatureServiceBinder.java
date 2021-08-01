@@ -13,6 +13,7 @@ public class TestIPCFeatureServiceBinder extends TestIPCFeatureService.Stub {
 
     @Override
     public long getCurrentThreadId() throws RemoteException {
+        Log.d(TAG, "getCurrentThreadId");
         return Thread.currentThread().getId();
     }
 
