@@ -3,6 +3,7 @@ package com.example.datastructureandalgorithm.algorithm.easysort;
 import com.example.datastructureandalgorithm.LogUtil;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
 import java.util.TreeMap;
 
@@ -40,6 +41,18 @@ public class EasySort {
         int[] insertSortArray = Arrays.copyOf(a, a.length);
         easySort.insertSort(insertSortArray);
         LogUtil.tagLog(TAG, "insertSort=" + Arrays.toString(insertSortArray));
+
+
+        // 接下来是几个比较高端的排序了！
+        int[] quickSortArray = Arrays.copyOf(a, a.length);
+        easySort.quickSort(quickSortArray, 0, quickSortArray.length - 1);
+        LogUtil.tagLog(TAG, "quickSort=" + Arrays.toString(quickSortArray));
+
+        int[] shellSortArray = Arrays.copyOf(a, a.length);
+        easySort.shellSort(shellSortArray);
+        LogUtil.tagLog(TAG, "shellSort" + Arrays.toString(shellSortArray));
+
+
     }
 
     /**
@@ -101,6 +114,8 @@ public class EasySort {
      * 数据，意味着之后的索引位置都得变动！插入排序也避免不了呀。只能在基础上优化插入的次数，但是不能避免。
      *
      * 那么插入排序算法是怎么做的呢？
+     * 首先你要记住的是，左手拿的牌，永远是已经排好序的！！这个非常非常重点，所以要记下来！！！
+     *
      * 人家就是两两相比较，谁小谁调换位置在前面。直到碰到个比自己更小的，终止此轮循环。
      * 这毕竟是你自己的笔记，按照你的思路，你此时肯定会对一件事有疑惑。我已经预料到了之后复习的你的这个问题。就是，插入就
      * 意味着多一个空间，那个多出的一个空间最开始到底是谁腾出来的？哈哈哈哈。
@@ -109,9 +124,13 @@ public class EasySort {
      */
     private void insertSort(int[] data) {
         int temp;
-        for (int i = 0; i < data.length; i ++) {
-            for (int k = i; k >= 0 && k < data.length - 1; k --) {
-                // K + 1这个位置， 就是新空间。
+        for (int i = 0; i < data.length; i ++) { //总共n个数
+
+            //注意k的赋值是i, 因为这是第i趟遍历了，假定从左往右数，已经有i个有序的数了。就像我们打牌，左手的那波永远都是有顺序的！
+            // 想想，假设第一次排牌， 那么i 就是0， 强两个牌进行排序，自然就是这两个牌从小到大了。
+            // i=1的时候，右手拿出第三张牌了已经，第三张牌这样冒泡往前卷，迟早会定位到合适的位置。就是这个道理'。
+            for (int k = i; k + 1 < data.length && k >= 0; k --) {
+//                k + 1就是右手拿的新牌，就像冒泡一样置换。
                 if (data[k + 1] < data[k]) {
                     temp = data[k + 1];
                     data[k + 1] = data[k];
@@ -122,4 +141,101 @@ public class EasySort {
             }
         }
     }
+
+    /**
+     * 快排
+     *
+     * 我没记错的话，基本思想是这样的，就是采用了二分的思维。取出一个比较基数进行排序。最终使左面的数比基数小，右面的数比基数大。
+     * 然后再将这个排好的数组进行二分切分。周而复始，直至全部排完。
+     *
+     * 至于怎么实现。三点临时变量， 左索引，右索引， 比较基数。
+     * 要记住两个索引位置，左，右，在两侧，取索引位置数，不断的与基数进行对比，然后如果需要，就进行置换。直到
+     * 左右两个索引位置重合了。一趟排序算是完成了。
+     *
+     * 如何很简洁的实现这个逻辑呢，头疼ing。。。
+     *
+     * 总算是写完了。 记住以下几点：
+     * 1 小心减超，所以加判断。
+     * 2 while 套 两个同级的while。 这两个同级的while，是不断让指针前移的操作。移不动了再赋值。
+     * 3 每一处都要对应的 start++ 或者 end -- 视情况而定。
+     * 4 二分嘛，所以要递归！递归条件判断好哈！
+     *
+     * 速记： start和 end 优先往里面移动!移动条件就是和基数比较大小，直到找到不能移动马上替换的项。执行替换之后，酌情判断end-- 或者start++
+     * 之后再按照刚才步骤操作另外一个对立面的数。 比如你先对左侧往前捋，捋到必须置换数据了，置换完后确保指针变化对之后，再开始捋右侧，按照完全相对的
+     * 步骤处理。两者是对立的。希望写的时候动脑子哈。
+     *
+     * 如果还是不熟的话，那就默写一下吧。这个很容易面试到的。
+     * @param data
+     */
+    private void quickSort(int[] data, int start, int end) {
+        if (end <= start) {
+            return;
+        }
+
+        int p = data[start];
+        int originStart = start;
+        int originEnd = end;
+
+        while (end > start) {
+            while (data[end] > p && end > start) {
+                end --;
+            }
+
+            // 这一处需要格外记一下！为什么还加判断呢？原因很简单， 上面的代码，很可能减超！懂？
+            // 我们看整套方法，只是在一个大数组的局域部分来回搬值而已。但是上面很危险的是减超，或者加超。
+            // 超的话很容易会改掉另外二分区域的值，整套计算下来就会出大麻烦。
+            if (end > start) {
+                // 这个技巧需要记一下。因为p这个值迟早是中间的那个数。所以理论上来讲，算是已经为倒腾数据永远腾了一个空。
+                // 所以此处你会发现并没有按照传统进行trans操作，而是直接赋值！因为end赋值给start之后，end的值就没有意义了，然鹅下一个被替换的就是这个位置
+                // 随意它迟早会给一个合理的值的。不必担心
+                data[start] = data[end];
+                start ++;
+            }
+
+            while (data[start] < p && end > start) {
+                start ++;
+            }
+            if (end > start) {
+                data[end] = data[start];
+                end --;
+            }
+        }
+        data[end] = p;
+        quickSort(data, originStart, end - 1);
+        quickSort(data, end + 1, originEnd);
+    }
+
+    /**
+     * 希尔排序
+     * 这个排序方法我总是忘，一遍又一遍的总是忘掉。简直了。
+     * @param data
+     */
+    private void shellSort(int[] data) {
+        for (int i = data.length / 2; i >= 1; i /= 2) {
+            for (int k = 0; k < i; k ++) {
+                shellPartInsertSort(data, k, i);
+            }
+        }
+    }
+
+
+    private void shellPartInsertSort(int[] data, int start, int step) {
+        if (start + step > data.length) {
+            return;
+        }
+
+        int temp;
+        for (; start < data.length; start += step) {
+            for (int k = start; k + step < data.length && k - step >= 0; k -= step) {
+                if (data[k + start] < data[k]) {
+                    temp = data[k + start];
+                    data[k + start] = data[k];
+                    data[k] = temp;
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
 }
