@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 public class EasySort {
     private static final String TAG = "EasySort";
-    private static final int ARRAY_ITEM_COUNT = 150000;
+    private static final int ARRAY_ITEM_COUNT = 20;
     public static void main(String[] args) {
         /**
          * 要求全部从小到大排序
@@ -22,40 +22,40 @@ public class EasySort {
             a[i] = random.nextInt(100000);
         }
 
-//        LogUtil.tagLog(TAG, "原始数据如下：");
-//        LogUtil.tagLog(TAG, Arrays.toString(a));
-//        LogUtil.tagLog(TAG, " ");
+        LogUtil.tagLog(TAG, "原始数据如下：");
+        LogUtil.tagLog(TAG, Arrays.toString(a));
+        LogUtil.tagLog(TAG, " ");
 
-//        int[] popSortArray = Arrays.copyOf(a, a.length);
+        int[] popSortArray = Arrays.copyOf(a, a.length);
 
         EasySort easySort = new EasySort();
-//        easySort.popSort(popSortArray);
+        easySort.popSort(popSortArray);
 
-//        LogUtil.tagLog(TAG, "easySort=" + Arrays.toString(popSortArray));
+        LogUtil.tagLog(TAG, "easySort=" + Arrays.toString(popSortArray));
 
-//        int[] selectArray = Arrays.copyOf(a, a.length);
+        int[] selectArray = Arrays.copyOf(a, a.length);
 
-//        easySort.selectSort(selectArray);
-//        LogUtil.tagLog(TAG, "selectSort=" + Arrays.toString(selectArray));
+        easySort.selectSort(selectArray);
+        LogUtil.tagLog(TAG, "selectSort=" + Arrays.toString(selectArray));
 
-//        int[] insertSortArray = Arrays.copyOf(a, a.length);
-//        easySort.insertSort(insertSortArray);
-//        LogUtil.tagLog(TAG, "insertSort=" + Arrays.toString(insertSortArray));
+        int[] insertSortArray = Arrays.copyOf(a, a.length);
+        easySort.insertSort(insertSortArray);
+        LogUtil.tagLog(TAG, "insertSort=" + Arrays.toString(insertSortArray));
 
 
         // 接下来是几个比较高端的排序了！
         int[] quickSortArray = Arrays.copyOf(a, a.length);
-        long insertTime = System.currentTimeMillis();
+//        long insertTime = System.currentTimeMillis();
         easySort.quickSort(quickSortArray, 0, quickSortArray.length - 1);
-        LogUtil.tagLog(TAG, "插入排序用时：" + (System.currentTimeMillis() - insertTime));
-//        LogUtil.tagLog(TAG, "quickSort=" + Arrays.toString(quickSortArray));
+//        LogUtil.tagLog(TAG, "插入排序用时：" + (System.currentTimeMillis() - insertTime));
+        LogUtil.tagLog(TAG, "quickSort=" + Arrays.toString(quickSortArray));
 
 
         int[] shellSortArray = Arrays.copyOf(a, a.length);
-        long shellTime = System.currentTimeMillis();
+//        long shellTime = System.currentTimeMillis();
         easySort.shellSort(shellSortArray);
-        LogUtil.tagLog(TAG, "希尔排序用时：" + (System.currentTimeMillis() - shellTime));
-//        LogUtil.tagLog(TAG, "shellSort" + Arrays.toString(shellSortArray));
+//        LogUtil.tagLog(TAG, "希尔排序用时：" + (System.currentTimeMillis() - shellTime));
+        LogUtil.tagLog(TAG, "shellSort" + Arrays.toString(shellSortArray));
 
 
     }
@@ -235,18 +235,39 @@ public class EasySort {
      */
     private void shellSort(int[] data) {
         int temp;
-        for (int step = data.length / 2; step > 0; step /= 2) {
-            for (int index = 0; index < data.length; index += step) {
-                for (int k = index; k >= 0 && k + step < data.length; k -= step) {
-                    if (data[k + step] < data[k]) {
-                        temp = data[k + step];
-                        data[k + step] = data[k];
-                        data[k] = temp;
-                    } else {
-                        break;
+        for (int step = data.length / 2; step > 0; step /= 2) { // 得到步长
+            for (int groupIndex = 0; groupIndex < step; groupIndex ++) { // 有几个步长，就意味着有几组数据要进行排序
+                for (int startIndex = groupIndex; startIndex < data.length; startIndex += step) { // 遍历每一个组
+                    for (int nextIndex = startIndex + step; nextIndex >= groupIndex && nextIndex < data.length; nextIndex -= step) {
+                        if (data[nextIndex] < data[nextIndex - step]) {
+                            temp = data[nextIndex];
+                            data[nextIndex] = data[nextIndex - step];
+                            data[nextIndex - step] = temp;
+                        } else {
+                            break;
+                        }
                     }
                 }
             }
         }
+
+
+
+
+
+//        int temp;
+//        for (int step = data.length / 2; step > 0; step /= 2) {
+//            for (int index = 0; index < data.length; index += step) {
+//                for (int k = index; k >= 0 && k + step < data.length; k -= step) {
+//                    if (data[k + step] < data[k]) {
+//                        temp = data[k + step];
+//                        data[k + step] = data[k];
+//                        data[k] = temp;
+//                    } else {
+//                        break;
+//                    }
+//                }
+//            }
+//        }
     }
 }
