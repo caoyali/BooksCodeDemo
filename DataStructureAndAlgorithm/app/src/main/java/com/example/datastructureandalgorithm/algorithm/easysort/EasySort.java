@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 public class EasySort {
     private static final String TAG = "EasySort";
-    private static final int ARRAY_ITEM_COUNT = 20;
+    private static final int ARRAY_ITEM_COUNT = 15;
     public static void main(String[] args) {
         /**
          * 要求全部从小到大排序
@@ -26,9 +26,9 @@ public class EasySort {
         LogUtil.tagLog(TAG, Arrays.toString(a));
         LogUtil.tagLog(TAG, " ");
 
+        EasySort easySort = new EasySort();
         int[] popSortArray = Arrays.copyOf(a, a.length);
 
-        EasySort easySort = new EasySort();
         easySort.popSort(popSortArray);
 
         LogUtil.tagLog(TAG, "easySort=" + Arrays.toString(popSortArray));
@@ -56,7 +56,6 @@ public class EasySort {
         easySort.shellSort(shellSortArray);
 //        LogUtil.tagLog(TAG, "希尔排序用时：" + (System.currentTimeMillis() - shellTime));
         LogUtil.tagLog(TAG, "shellSort" + Arrays.toString(shellSortArray));
-
 
     }
 
@@ -227,22 +226,53 @@ public class EasySort {
      *
      * 希尔排序，简单来说就是分组+插入排序。
      *
-     * 排序方法有这么多，为什么就选择用插入排序呢？因为插入排序的特性是，复杂度在有序的情况下为O(n).最坏情况下才O(n2).
+     * 排序方法有这么多，为什么就选择用插入排序呢？冒泡选择不可以么？因为插入排序的特性是，复杂度在有序的情况下为O(n).最坏情况下才O(n2).
      * 并且插入排序在总量比较小的情况下表现会比较好。
      * 而希尔排序的分组部分，恰恰就是为了促进无序变有序。所以排序的部分采用的是插入排序。
      * 希尔排序可不能再链式数据结构上计算。链式跳跃着找，老麻烦了。
+     *
+     * 网上有个排序自称是希尔排序，但是实现方式看起来连分组都没有实现。性能也不怎么样，赶不上插入排序。
+     * 这特么是有个让我怀疑人生的排序方法啊，我搞了半天总觉得自己写错了，因为他真的真的比插入排序慢（100W）数据的
+     * 情况下。我一度认为是自己写错了！但是我觉得网上写的不对。我甚至把网上的代码抄下来测试，发现他们也是慢！
+     * 我忽然理解其中的原因了，我把被排序的数组总数降到了1000， 按照int 4字节 32位的话， 应该占 1000*32 = 32000个比特位  32K约。
+     * 这时候希尔排序用的时间可以达到插入排序的一半。是有效果的！
+     * 但是当我不断的将这个数组的容量扩大，比如我扩到了100万个，问题就出来了，希尔排序反而比插入排序慢！这是为什么呢？
+     * 忽然看家本领灵机一动，我想到了操作系统分页问题！希尔排序的跳跃性很大，当数组数量很大的时候，各个数据就会来回跳。势必会导致操作系统不断的分页。
+     * 这样的话，时间自然而言就多出来了。
+     * 这特么绝对是我这两天最大的收获啊！！！！
+     * 所以不是你算法写的不对，是一些其他的原因导致的同学。666. 下面讲一下重点--我怎么排的吧：
+     *
+     *
+     * 首先记住的一点，四层循环！别听网上扯淡。他们写的咳咳咳咳。。。
+     *
+     * 希尔排序整体就是不断缩小增量对其分组，然后拿出组里的数据进行插入排序。分组规则也相当简洁明了，就是总数/2/2/2/2这样缩小增量直到增量为1.
+     * 其实这个增量吧，什么都行。但是为了方便就不断取1/2这种增量。不要对这个值过于纠结哈。
+     * 想象一下我们分成了若干组，再排序，当增量不断的缩小，其实我们的数据越来越趋于有序了。有序对于插入排序而言实际上是最好了。
+     * 所以最后一趟插入排序的时候，涉及到的置换会比 纯插入排序会好上很多。
+     *
+     * 那么我们首先来梳理一下，
+     * 1 我得有个循环计算增量
+     * 2 拿到增量之后，就按照增量来进行分组了，就像上方链接讲的那样。我们很清楚的一点就是，我们会得到不止一组，而是很多组， 组的数量，正是这个增量的数量。
+     * 所以我们要针对每一个组，都进行插入排序。所以我们还要加一个循环，来遍历这个组数。
+     * 3 好，接下来我们才会真正的进入针对每个组的内容进行插入排序，从这往后的逻辑就是与我们之前的插入排序大致相同了！插入排序是有
+     * 两层循环的！详情看看我写的代码。
+     * 所以加起来有四层循环。
      * @param data
      */
     private void shellSort(int[] data) {
         int temp;
-        for (int step = data.length / 2; step > 0; step /= 2) { // 得到步长
-            for (int groupIndex = 0; groupIndex < step; groupIndex ++) { // 有几个步长，就意味着有几组数据要进行排序
-                for (int startIndex = groupIndex; startIndex < data.length; startIndex += step) { // 遍历每一个组
-                    for (int nextIndex = startIndex + step; nextIndex >= groupIndex && nextIndex < data.length; nextIndex -= step) {
-                        if (data[nextIndex] < data[nextIndex - step]) {
-                            temp = data[nextIndex];
-                            data[nextIndex] = data[nextIndex - step];
-                            data[nextIndex - step] = temp;
+        // 得到增量
+        for (int step = data.length / 2; step > 0; step /= 2) {
+            // 拿到增量之后，我们会分成 "增量" 个组。所以有必要对每个组都进行插入排序。
+            for (int groupStartIndex = 0; groupStartIndex < step; groupStartIndex ++) {
+                // 开始正式的插入排序。依然要记住的一个核心是，插入排序，是假定前面的数都已有序。事实上就是这个
+                // 样子。所以你才会看到下面的第二层循环出现 currIndex -= step  以及 走进循环发现不对就  break 。这种操作。
+                for (int groupItem = groupStartIndex; groupItem < data.length; groupItem += step) {
+                    for (int currIndex = groupItem + step; currIndex < data.length && currIndex > groupStartIndex; currIndex -= step) {
+                        if (data[currIndex] < data[currIndex - step]) {
+                            temp = data[currIndex];
+                            data[currIndex] = data[currIndex - step];
+                            data[currIndex - step] = temp;
                         } else {
                             break;
                         }
@@ -250,24 +280,5 @@ public class EasySort {
                 }
             }
         }
-
-
-
-
-
-//        int temp;
-//        for (int step = data.length / 2; step > 0; step /= 2) {
-//            for (int index = 0; index < data.length; index += step) {
-//                for (int k = index; k >= 0 && k + step < data.length; k -= step) {
-//                    if (data[k + step] < data[k]) {
-//                        temp = data[k + step];
-//                        data[k + step] = data[k];
-//                        data[k] = temp;
-//                    } else {
-//                        break;
-//                    }
-//                }
-//            }
-//        }
     }
 }
