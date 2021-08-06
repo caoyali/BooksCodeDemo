@@ -2,6 +2,7 @@ package com.example.datastructureandalgorithm.algorithm.easysort;
 
 import com.example.datastructureandalgorithm.LogUtil;
 
+import java.lang.annotation.ElementType;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
@@ -9,7 +10,7 @@ import java.util.TreeMap;
 
 public class EasySort {
     private static final String TAG = "EasySort";
-    private static final int ARRAY_ITEM_COUNT = 15;
+    private static final int ARRAY_ITEM_COUNT = 14;
     public static void main(String[] args) {
         /**
          * 要求全部从小到大排序
@@ -19,7 +20,7 @@ public class EasySort {
         int[] a = new int[ARRAY_ITEM_COUNT];
 
         for (int i = 0; i < ARRAY_ITEM_COUNT; i++) {
-            a[i] = random.nextInt(100000);
+            a[i] = random.nextInt(100);
         }
 
         LogUtil.tagLog(TAG, "原始数据如下：");
@@ -181,6 +182,15 @@ public class EasySort {
         int originEnd = end;
 
         while (end > start) {
+            /*
+            * 我发现一个特别神奇的事情，就是 先把end往前推，再将start往后推，否则得到的结果就会出错。
+            * 奇葩啊！为什么呢？我又不是机器人，一开始我是想不出来为啥的。那不如画图演示一遍？
+            *
+            * 我想到原因了，因为  p 的赋值一开始是start这个索引，p被拿出来，就相当于start索引位置的值是个废值！所以
+            * 我们得为start找合理的值，那么只能从end往前推，找到合适的值来进行补位。这个细节是很容易忽略，但是是
+            * 相当重要的。如果想写代码一遍过，请记住这个细节！
+            *
+            * */
             while (data[end] > p && end > start) {
                 end --;
             }
@@ -207,6 +217,7 @@ public class EasySort {
         data[end] = p;
         quickSort(data, originStart, end - 1);
         quickSort(data, end + 1, originEnd);
+
     }
 
     /**
