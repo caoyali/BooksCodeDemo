@@ -23,16 +23,14 @@ public class EasySort {
             a[i] = random.nextInt(100);
         }
 
-        LogUtil.tagLog(TAG, "原始数据如下：");
-        LogUtil.tagLog(TAG, Arrays.toString(a));
-        LogUtil.tagLog(TAG, " ");
+        LogUtil.tagLog(TAG, "原始数据：" + Arrays.toString(a));
 
         EasySort easySort = new EasySort();
         int[] popSortArray = Arrays.copyOf(a, a.length);
 
         easySort.popSort(popSortArray);
 
-        LogUtil.tagLog(TAG, "easySort=" + Arrays.toString(popSortArray));
+        LogUtil.tagLog(TAG, "popSort=" + Arrays.toString(popSortArray));
 
         int[] selectArray = Arrays.copyOf(a, a.length);
 
@@ -70,14 +68,20 @@ public class EasySort {
      */
     private void popSort(int[] data){
         int temp;
-
+        boolean isSwap = false; // 加分项，加一个flag，来节省循环的次数。当数据本身就是有序的数时，效果会尤为显著。
         for (int i = 0; i < data.length; i ++) {
+            isSwap = false;
             for (int k = 0; k < data.length - i - 1; k ++) {
                 if (data[k] > data[k + 1]) {
                     temp = data[k];
                     data[k] = data[k + 1];
                     data[k + 1] = temp;
+                    isSwap = true;
                 }
+            }
+            // 如果这次循环中根本就没有发生交换，那么这个数据就已经是有序的了。这个要记住，是一个加分项。
+            if (!isSwap) {
+                return;
             }
         }
     }
