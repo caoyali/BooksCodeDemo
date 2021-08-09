@@ -1,5 +1,6 @@
 package com.example.serviceipcdemo;
 
+import android.graphics.Rect;
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -25,5 +26,10 @@ public class TestIPCFeatureServiceBinder extends TestIPCFeatureService.Stub {
     @Override
     public void pause() throws RemoteException {
         Log.d(TAG, "Begin pause...");
+    }
+
+    @Override
+    public Rect getRundomRect() throws RemoteException {
+        return null;
     }
 }
