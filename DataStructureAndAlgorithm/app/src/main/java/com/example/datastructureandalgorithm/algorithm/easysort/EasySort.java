@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 public class EasySort {
     private static final String TAG = "EasySort";
-    private static final int ARRAY_ITEM_COUNT = 14;
+    private static final int ARRAY_ITEM_COUNT = 15;
     public static void main(String[] args) {
         /**
          * 要求全部从小到大排序
@@ -23,13 +23,14 @@ public class EasySort {
             a[i] = random.nextInt(100);
         }
 
-        LogUtil.tagLog(TAG, "原始数据：" + Arrays.toString(a));
+//        LogUtil.tagLog(TAG, "原始数据：" + Arrays.toString(a));
 
         EasySort easySort = new EasySort();
         int[] popSortArray = Arrays.copyOf(a, a.length);
 
+//        long popTime = System.currentTimeMillis();
         easySort.popSort(popSortArray);
-
+//        LogUtil.tagLog(TAG, "冒泡排序用时：" + (System.currentTimeMillis() - popTime));
         LogUtil.tagLog(TAG, "popSort=" + Arrays.toString(popSortArray));
 
         int[] selectArray = Arrays.copyOf(a, a.length);
@@ -64,14 +65,55 @@ public class EasySort {
      * 排到最后面的肯定就是那个最大（或者最小）的。
      *
      * 特点， 一边比一边换位置。 比较的时候会换位置。卷到最后的都是王者，最后全卷完就拍好了。
+     *
+     * 优化点有两处。
+     * 1 如果根本就不再发生置换操作了，说明已经是有序的了。这个没必要继续执行
+     * 2 记住最后一个置换位的下标，下次只循环到上次置换的地方即可。
+     *
      * @param data
      */
     private void popSort(int[] data){
+
+        /*无优化点， 258 sm*/
+//        int temp;
+//        int k;
+//        for (int i = 0; i < data.length; i ++) {
+//            for (k = 0; k < data.length - i - 1; k++) {
+//                if (data[k] > data[k + 1]) {
+//                    temp = data[k];
+//                    data[k] = data[k + 1];
+//                    data[k + 1] = temp;
+//                }
+//            }
+//        }
+
+//        /*一处优化点 297 sm  为什么越来越慢！*/
+//        int temp;
+//        boolean isSwap = false;
+//        int k;
+//        for (int i = 0; i < data.length; i ++) {
+//            isSwap = false;
+//            for (k = 0; k < data.length - i - 1; k++) {
+//                if (data[k] > data[k + 1]) {
+//                    temp = data[k];
+//                    data[k] = data[k + 1];
+//                    data[k + 1] = temp;
+//                    isSwap = true;
+//                }
+//            }
+//            if (!isSwap)  {
+//                return;
+//            }
+//        }
+
+//        /*两处优化点  401sm what???*/
         int temp;
         boolean isSwap = false; // 加分项，加一个flag，来节省循环的次数。当数据本身就是有序的数时，效果会尤为显著。
+        int swapIndex = data.length - 1;
+        int k;
         for (int i = 0; i < data.length; i ++) {
             isSwap = false;
-            for (int k = 0; k < data.length - i - 1; k ++) {
+            for (k = 0; k < swapIndex; k++) {
                 if (data[k] > data[k + 1]) {
                     temp = data[k];
                     data[k] = data[k + 1];
@@ -79,8 +121,10 @@ public class EasySort {
                     isSwap = true;
                 }
             }
-            // 如果这次循环中根本就没有发生交换，那么这个数据就已经是有序的了。这个要记住，是一个加分项。
-            if (!isSwap) {
+            if (isSwap) {
+                swapIndex = k;
+            } else {
+                // 如果这次循环中根本就没有发生交换，那么这个数据就已经是有序的了。这个要记住，是一个加分项。
                 return;
             }
         }
@@ -296,4 +340,24 @@ public class EasySort {
             }
         }
     }
+
+    /**
+     * 归并排序的难度不小，没必要死磕非要搞定。我觉的先学学别的加点自信吧。
+     * @param data
+     */
+    private void mergeSort(int[] data){
+        
+    }
+
+//   private void group(int[] data, int start, int end) {
+//        if (start > end) {
+//            return;
+//        }
+//
+//        int m = (start + end) / 2;
+//        group(data, start, m);
+//        group(data, m + 1, end);
+//
+//        merge()
+//    }
 }
