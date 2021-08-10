@@ -20,9 +20,7 @@ aldl如果不搞跨进程的话，写这个也没什么意思了哈。所以我�
 - 4 **ServiceSonnection** 实现类，用于开启Service的所属进程获得Binder实现类的具柄，拿到这个句柄之后就可以开始跨进程干活了。
 - 5 开启一个Service的方式，以及其生命周期。
 
-下面我们先讲两个例子
-
-###例子1，Service什么的都写在开发的应用内。IPC
+### 应用内服务
 
 Android大家都知道的一个是，要跨进程，就要涉及到，binder。而我们为什么要写aidl呢？原因也是binder。是用它来生成一个binder的子类接口。自动生成接口之后，用户需要实现这个接口。而这个接口的实现类，就是一个binder。之后Service会有方法让被调用者拿到这个binder。拿到之后，进行类型强转，之后就可以拿这个binder做一些列操作。从而完成跨进程调用了。
 
@@ -182,9 +180,11 @@ public class ServiceTest extends Service {
 </service>
 ```
 这里仅仅说的是 service节点下的，属性
-**android:process** : 是否于单独的进程中进行，当设置为 android:process=":remote"时，代表Service在单独的进程中进行。 这里面的":"很重要，不加的话，进程的名字就不带包名。
+**android:process** : 是否于单独的进程中进行，当设置为 android:process=":remote"时，代表Service在单独的进程中进行。 这里面的":"很重要，不加的话，进程的名字就不带包名。也有另外一种说法： android:process=":remote"，代表在应用
+  程序里，当需要该service时，会自动创建新的进程，意思就是说你配的service会在另外一个进程中运行，而如果是
+android:process="remote"，没有“:”分号的，则创建全局进程，不同的应用程序共享该进程。<font color=blue>我碰到了一个安装不上服务的问题。原因是我的process名字起的跟别的应用的里面的某个服务名字重复了，改了之后就能够安装上了！说明一个手机中是不能存在两个process名字相同的service的！</font>
 
-**android:exported** : 代表是否能被其他应用隐式调用，其默认值是service中有误intent-filter决定，如果有，默认值为true，否则为false。但是如果用户强制声明此值为false了，那么久意味着外部不可能通过隐式调用了。
+**android:exported** : 代表是否能被其他应用隐式调用，是否允许外接访问。其默认值是service中有误intent-filter决定，如果有，默认值为true，否则为false。但是如果用户强制声明此值为false了，那么久意味着外部不可能通过隐式调用了。
 
 **android:name** 对应的Service类名
 
@@ -195,8 +195,6 @@ public class ServiceTest extends Service {
 ###小结总结
 
 整个步骤
+<font color=#B8860B font=blod>
 aidl--> aidl实现--> service onBinder吐出--> ServiceConnection捞取。
-### 2 Client是我自己的应用，但Service写成一个其他应用的服务，实现案例
-
-
-###小结
+</color>

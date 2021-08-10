@@ -12,8 +12,7 @@
         <service android:name=".TestIPCService"
             android:exported="true"
             android:enabled="true"
-            android:process="remote1"
-            >
+            android:process=":TestIPCService">
             <intent-filter>
                 <action android:name="com.example.serviceipcdemo.testipcfeatureservice"/>
             </intent-filter>
