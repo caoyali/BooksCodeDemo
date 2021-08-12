@@ -1,6 +1,5 @@
 package com.example.generics;
 
-import android.webkit.WebStorage;
 
 import java.util.ArrayList;
 import java.util.List;
