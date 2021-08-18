@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * 纸质书 433页
+ * 数组的简介
+ * note  AAA_数组为何特殊.md
  */
 public class AAA_ContainerComparision {
 

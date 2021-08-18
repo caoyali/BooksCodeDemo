@@ -14,6 +14,6 @@ public class Holder2 {
     }
 
     public static void main(String[] args) {
-        Holder2 h2 = new Holder2(new Au)
+//        Holder2 h2 = new Holder2(new Au)
     }
 }

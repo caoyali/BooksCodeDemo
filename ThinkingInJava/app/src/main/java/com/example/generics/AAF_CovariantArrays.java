@@ -31,13 +31,13 @@ public class AAF_CovariantArrays {
     }
 
     static void addList3(List<? extends Apple> list, Jonanthan apple) {
-        list.add(apple);
+//        list.add(apple);
     }
 
     static void addFruit(List<? extends Fruit> list) {
-        list.add(new Fruit());
-        list.add(new Apple());
-        list.add(new Orange());
+//        list.add(new Fruit());
+//        list.add(new Apple());
+//        list.add(new Orange());
     }
 
     static List<Fruit> fruits = new ArrayList<>();
