@@ -45,5 +45,6 @@ public class AAB_Holder<T> {
         } catch (Exception e) {
 
         }
+        Class clazz = AAB_Holder.class;
     }
 }
