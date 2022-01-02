@@ -229,4 +229,29 @@ public class Fund {
     public void setRowData(String rowData) {
         this.rowData = rowData;
     }
+
+    @Override
+    public String toString() {
+        return "Fund{" +
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", date='" + date + '\'' +
+                ", netValue=" + netValue +
+                ", dayRise=" + dayRise +
+                ", weekRise=" + weekRise +
+                ", monthRise=" + monthRise +
+                ", threeMonthsRise=" + threeMonthsRise +
+                ", sixMonthsRise=" + sixMonthsRise +
+                ", oneYearRise=" + oneYearRise +
+                ", twoYearsRise=" + twoYearsRise +
+                ", threeYearsRise=" + threeYearsRise +
+                ", curYearRise=" + curYearRise +
+                ", historyRise=" + historyRise +
+                ", poundage=" + poundage +
+                ", dtStatus=" + dtStatus +
+                ", dealStatus=" + dealStatus +
+                ", rowData='" + rowData + '\'' +
+                '}';
+    }
 }

@@ -29,6 +29,7 @@ public class FundSearch {
         funds = funds.stream().filter(e -> e.getDealStatus() == 1 && e.getWeekRise() > 1 && e.getMonthRise() > 4 && e.getThreeMonthsRise() > 12 && e.getSixMonthsRise() > 24 && e.getOneYearRise() > 48).collect(Collectors.toList());
         System.out.println("符合条件的基金共" + funds.size() + "只");
         funds.forEach(e -> System.out.println(e.getRowData()));
+        funds.forEach(e -> System.out.println(e));
     }
 
 
@@ -68,6 +69,7 @@ public class FundSearch {
     public static Integer getPages(String text) {
         text = text.replace("var rankData = ", "");
         text = text.replace(";", "");
+
         JSONObject json = JSONObject.parseObject(text);
         Integer pages = json.getInteger("allPages");
         return pages;
