@@ -98,3 +98,41 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
+## 函数变体
+
+实际上就是多参数的函数，或者一个参数也不接受的那种函数！太简单了！但是对于哪些没有参数的函数，他们的函数原型是：
+```int rand(void)```此类的写法。
+在有些语言中，有返回值的函数称之为函数，没有返回值的函数称之为过程。
+
+## 用户定义的函数
+上面我们已经写到，就算是标准库，其实也是存在某处一定有函数的原型的。 如果用户自己编写函数的话，也是要遵循这个标准的。也就是说，你也得写原型。
+```c++
+# include <iostream>
+void simon(int);
+int main() 
+{
+    using namespace std;
+    simon(3);
+    cout << "Pick an integer:";
+    int count;
+    cin >> count;
+    simon(count);
+    cout << "done!" << endl;
+    return 0;
+}
+
+void simon(int n)  //函数头
+{
+    using namespace std;
+    cout << "Simon says touch your toes " << n << " times." << endl;
+}
+```
+
+函数的基本写法可以抽象为如下公式。
+
+```c++
+type functionName(arguments)
+{
+    statements
+}
+```
