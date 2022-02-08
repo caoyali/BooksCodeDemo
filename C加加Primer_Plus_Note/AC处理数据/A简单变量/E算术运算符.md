@@ -23,3 +23,21 @@ int main() {
 <font color=red>但是就在我刚才写例子的时候碰见了一个有些头疼的问题， 就是 float ， a = 11.17 b = 50.25  加起来竟然展示的是 61.419998 , 但是在现实中的话应该是61.42才对。</font>
 ![Snipaste_2022-02-07_21-48-16](/assets/Snipaste_2022-02-07_21-48-16.png)
 可是事实上明明是 61.42 为什么成了  61.419998？？书上说是float类型表示的有效位能力是有限的。但是我依然不理解凭什么就给削成这样了？？？
+
+## 求模运算符
+
+```c++
+#include <iostream>
+int main() {
+    using namespace std;
+    const int Lbs_per_stn = 14;
+    int lbs;
+
+    cout << "Enter your weight in pounds:" << endl;
+    cin >> lbs;
+    int stone = lbs / Lbs_per_stn;
+    int pounds = lbs % Lbs_per_stn;
+    cout << lbs << " pounds are " << stone << " stone, " << pounds << " pounds(s)";
+    return 0;
+}
+``
