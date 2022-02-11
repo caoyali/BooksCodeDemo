@@ -3,6 +3,9 @@
     <CLASSES>
       <root url="file://$USER_HOME$/gradle/caches/transforms-1/files-1.1/support-dynamic-animation-26.1.0.aar/97ce9d578b9a6c45ef58f7871ed0dcc4/res" />
       <root url="jar://$USER_HOME$/gradle/caches/transforms-1/files-1.1/support-dynamic-animation-26.1.0.aar/97ce9d578b9a6c45ef58f7871ed0dcc4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-dynamic-animation-26.1.0.aar/3b507430a366f72a8ec9ba5e43ef8c9c/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-dynamic-animation-26.1.0.aar/3b507430a366f72a8ec9ba5e43ef8c9c/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-dynamic-animation-26.1.0.aar/3b507430a366f72a8ec9ba5e43ef8c9c/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -3,6 +3,9 @@
     <CLASSES>
       <root url="file://$USER_HOME$/gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/41d1a8c14a9fddb06c1ffacf98deb943/res" />
       <root url="jar://$USER_HOME$/gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/41d1a8c14a9fddb06c1ffacf98deb943/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/7c816082871e691d423b031bd11c39ad/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/7c816082871e691d423b031bd11c39ad/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/7c816082871e691d423b031bd11c39ad/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

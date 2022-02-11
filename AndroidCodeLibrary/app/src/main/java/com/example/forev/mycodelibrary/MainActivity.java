@@ -1,6 +1,5 @@
 package com.example.forev.mycodelibrary;
 
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -26,7 +25,7 @@ public class MainActivity extends BaseActivity{
 
     @OnClick({R.id.animation_btn, R.id.view, R.id.mSelectFileBtn, R.id.mReflex, R.id.mPermissionRequest,
     R.id.mHookTest, R.id.mServiceTest, R.id.mProviderTest,R.id.mAlgorithmTest,
-    R.id.mSkill, R.id.mThread, R.id.mMemory, R.id.mServer, R.id.mKotlin})
+    R.id.mSkill, R.id.mThread, R.id.mMemory, R.id.mServer, R.id.mKotlin, R.id.mSurface})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.animation_btn:
@@ -67,6 +66,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.mKotlin:
 //                openActivity();
+                break;
+            case R.id.mSurface:
+                openActivity(SurfaceTestAct.class);
                 break;
         }
     }

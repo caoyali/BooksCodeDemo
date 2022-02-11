@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#10000000"
+    android:id="@+id/mRoot"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TransSurfaceActivity">
+
+<!--    <com.example.forev.mycodelibrary.simpleView.SurfaceViewDemo-->
+<!--        android:id="@+id/mSurfaceView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        android:layout_marginBottom="100dp" />-->
+
+    <TextView
+        android:id="@+id/mTest32Window"
+        android:layout_width="395dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/bg_6c_green_ff33cc66"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:text="开启另外一个透明的Activity"
+        android:textColor="@color/bg_btn_select"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</FrameLayout>
