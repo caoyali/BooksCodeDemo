@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">我的demo</string>
+    <string name="animation">动画</string>
+    <string name="view">自定义View</string>
+    <string name="toast">自定义toast</string>
+    <string name="loadingdialog">自定义loading</string>
+    <string name="constriant_layout">constriantlayout 约束布局实验</string>
+    <string name="motion_layout">motionLayout</string>
+    <string name="permission_des">权限的具体解释</string>
+    <string name="lambda">点击了lambda公式</string>
+    <string name="fra_answer_card_commit_btn">提交</string>
+    <string name="fra_answer_card_congratulation_correct">恭喜你，回答正确!</string>
+    <string name="fra_answer_card_regret_error">很遗憾，回答错误。</string>
+    <string name="fra_answer_card_wait_teacher_receive">已提交，请等待老师收卷。</string>
+    <string name="fra_answer_card_answer_person_num">%1$d人</string>
+
+    <!--字体相关key -->
+    <string-array name="certs">
+        <item>MIIEqDCCA5CgAwIBAgIJA071MA0GCSqGSIb3DQEBBAUAMIGUMQsww...</item>
+    </string-array>
+</resources>

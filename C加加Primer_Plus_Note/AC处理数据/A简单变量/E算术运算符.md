@@ -51,3 +51,21 @@ int main() {
 ```
 
 ![Snipaste_2022-02-08_08-02-23](/assets/Snipaste_2022-02-08_08-02-23.png)
+## 求模运算符
+
+
+```c++
+#include <iostream>
+int main() {
+    using namespace std;
+    const int Lbs_per_stn = 14;
+    int lbs;
+
+    cout << "Enter your weight in pounds:" << endl;
+    cin >> lbs;
+    int stone = lbs / Lbs_per_stn;
+    int pounds = lbs % Lbs_per_stn;
+    cout << lbs << " pounds are " << stone << " stone, " << pounds << " pounds(s)";
+    return 0;
+}
+``

@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <device id="Nexus 7" />
+        <device id="Nexus 10" />
+        <device id="pixel_4_xl" />
+        <device id="pixel_4" />
+        <device id="pixel_3a" />
+        <device id="pixel_3" />
+        <device id="pixel" />
+        <device id="pixel_2" />
+        <device id="pixel_3a_xl" />
+        <device id="pixel_2_xl" />
+      </config>
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="AvailableLibraryUpdateStorage">
+    <library-updates>
+      <library-update>
+        <group-id>com.jakewharton</group-id>
+        <name>butterknife-compiler</name>
+        <version>10.1.0</version>
+        <repository>JCenter</repository>
+      </library-update>
+      <library-update>
+        <group-id>com.android.support</group-id>
+        <name>appcompat-v7</name>
+        <version>28.0.0</version>
+        <repository>Google</repository>
+      </library-update>
+      <library-update>
+        <group-id>com.jakewharton</group-id>
+        <name>butterknife</name>
+        <version>10.1.0</version>
+        <repository>JCenter</repository>
+      </library-update>
+      <library-update>
+        <group-id>com.android.support</group-id>
+        <name>support-dynamic-animation</name>
+        <version>28.0.0</version>
+        <repository>Google</repository>
+      </library-update>
+      <library-update>
+        <group-id>com.android.support.constraint</group-id>
+        <name>constraint-layout</name>
+        <version>2.0.0-beta2</version>
+        <repository>Google</repository>
+      </library-update>
+      <library-update>
+        <group-id>junit</group-id>
+        <name>junit</name>
+        <version>4.13-beta-3</version>
+        <repository>JCenter</repository>
+      </library-update>
+      <library-update>
+        <group-id>com.android.support.test</group-id>
+        <name>runner</name>
+        <version>1.0.2</version>
+        <repository>Google</repository>
+      </library-update>
+      <library-update>
+        <group-id>com.android.support.test.espresso</group-id>
+        <name>espresso-core</name>
+        <version>3.0.2</version>
+        <repository>Google</repository>
+      </library-update>
+    </library-updates>
+    <last-search-timestamp>1563006654427</last-search-timestamp>
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="76a17a9e-649a-4bbf-93cf-5fd40a27465b" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/caoyali/.android/avd/Pixel_5_API_28.avd]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="MyCodeLibrary" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="resourceFile" />
+        <option value="layoutResourceFile" />
+        <option value="Class" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1YhprMoaOouwJisNEy93qrac5nn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DEBUGGABLE_DEVICE" value="huawei-ele_al00-8KE5T19702040170" />
+    <property name="DEBUGGABLE_PROCESS" value=".myDemo" />
+    <property name="DEBUGGER_ID" value="Auto" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3_XL_API_29_pad" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-07-15T11:20:56.230Z" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="android-custom-view/Users/caoyali/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.8.3/f547a950fc07d4820dbbdca90a42ecd7696f85b0/DanmakuFlameMaster-0.8.3-sources.jar!/master/flame/danmaku/ui/widget/DanmakuSurfaceView.java_SELECTED" value="DanmakuSurfaceView" />
+    <property name="android-custom-view/Users/caoyali/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.8.3/f547a950fc07d4820dbbdca90a42ecd7696f85b0/DanmakuFlameMaster-0.8.3-sources.jar!/master/flame/danmaku/ui/widget/DanmakuTextureView.java_SELECTED" value="DanmakuTextureView" />
+    <property name="android-custom-view/Users/caoyali/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.8.3/f547a950fc07d4820dbbdca90a42ecd7696f85b0/DanmakuFlameMaster-0.8.3-sources.jar!/master/flame/danmaku/ui/widget/DanmakuView.java_SELECTED" value="DanmakuView" />
+    <property name="android-custom-view/Users/caoyali/Library/Android/sdk/sources/android-28/android/view/View.java_SELECTED" value="View" />
+    <property name="android-custom-view/Users/caoyali/Library/Android/sdk/sources/android-28/android/view/ViewGroup.java_SELECTED" value="ViewGroup" />
+    <property name="android-custom-view/Users/caoyali/Library/Android/sdk/sources/android-28/android/widget/ImageView.java_SELECTED" value="ImageView" />
+    <property name="android-custom-view/Users/caoyali/my_github/BooksCodeDemo/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/utils/MyScrollView.java_MyScrollView_DIMENSIONS" value="1080&#10;1920" />
+    <property name="android-custom-view/Users/caoyali/my_github/BooksCodeDemo/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/utils/MyScrollView.java_SELECTED" value="MyScrollView" />
+    <property name="android-custom-view/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/simpleView/AttractedScrollView.java_SELECTED" value="AttractedScrollView" />
+    <property name="android-custom-view/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MyGroupView.java_SELECTED" value="MyGroupView" />
+    <property name="android-custom-view/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MySurfaceView.java_SELECTED" value="MySurfaceView" />
+    <property name="android-custom-view/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MyView.java_SELECTED" value="MyView" />
+    <property name="android-custom-view/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/TouchedView.java_SELECTED" value="TouchedView" />
+    <property name="android-custom-view/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/TouchedWebView.java_SELECTED" value="TouchedWebView" />
+    <property name="device.picker.selection" value="d6e6de82" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="memory.settings.postsync.last.time.stamp" value="1638891071155" />
+    <property name="multi-representation-preview/Users/caoyali/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.8.3/f547a950fc07d4820dbbdca90a42ecd7696f85b0/DanmakuFlameMaster-0.8.3-sources.jar!/master/flame/danmaku/ui/widget/DanmakuSurfaceView.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.8.3/f547a950fc07d4820dbbdca90a42ecd7696f85b0/DanmakuFlameMaster-0.8.3-sources.jar!/master/flame/danmaku/ui/widget/DanmakuTextureView.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.8.3/f547a950fc07d4820dbbdca90a42ecd7696f85b0/DanmakuFlameMaster-0.8.3-sources.jar!/master/flame/danmaku/ui/widget/DanmakuView.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/Library/Android/sdk/sources/android-28/android/view/View.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/Library/Android/sdk/sources/android-28/android/view/ViewGroup.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/Library/Android/sdk/sources/android-28/android/widget/ImageView.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/simpleView/AttractedScrollView.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MyGroupView.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MyGroupView1.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MySurfaceView.java_selected" value="" />
+    <property name="multi-representation-preview/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MyView.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/TouchedView.java_selected" value="Custom views" />
+    <property name="multi-representation-preview/Users/caoyali/my_github/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/TouchedWebView.java_selected" value="Custom views" />
+    <property name="not.eligible.for.single.variant.sync" value="true" />
+    <property name="project.structure.last.edited" value="Dependencies" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.33224222" />
+    <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
+    <property name="show.do.not.ask.upgrade.gradle.plugin" value="3.1.3" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.packageName">
+      <recent name="com.example.forev.mycodelibrary" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/aidl/com/example/forev/mycodelibrary" />
+      <recent name="$PROJECT_DIR$/app/libs/x86" />
+      <recent name="$PROJECT_DIR$/app/libs/armeabi" />
+      <recent name="$PROJECT_DIR$/app/libs/arm64-v8a" />
+      <recent name="$PROJECT_DIR$/app/libs/armeabi-v7a" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main" />
+    </key>
+    <key name="android.template.-1241339626">
+      <recent name="com.example.forev.mycodelibrary" />
+    </key>
+    <key name="android.template.-474145163">
+      <recent name="com.example.forev.mycodelibrary" />
+    </key>
+    <key name="android.template.-1865107775">
+      <recent name="com.example.forev.mycodelibrary" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="com" />
+    </key>
+    <key name="android.template.-595135192">
+      <recent name="com.example.forev.mycodelibrary" />
+    </key>
+    <key name="android.template.2126939466">
+      <recent name="com.example.forev.mycodelibrary" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.forev.mycodelibrary.usecase" />
+      <recent name="com.example.forev.mycodelibrary.utils" />
+      <recent name="com.example.forev.mycodelibrary.constant" />
+      <recent name="com.example.forev.mycodelibrary.simpleView" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Android App.app">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExampleUnitTest.addition_isCorrect" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MyCodeLibrary.app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.forev.mycodelibrary.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.forev.mycodelibrary" />
+      <option name="MAIN_CLASS_NAME" value="com.example.forev.mycodelibrary.ExampleUnitTest" />
+      <option name="METHOD_NAME" value="addition_isCorrect" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="MyCodeLibrary.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testRandomData()" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests" temporary="true" nameIsGenerated="true">
+      <module name="MyCodeLibrary.app" />
+      <option name="TESTING_TYPE" value="3" />
+      <option name="METHOD_NAME" value="testRandomData" />
+      <option name="CLASS_NAME" value="com.example.forev.mycodelibrary.usecase.RandomDataUtilTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="INCLUDE_GRADLE_EXTRA_OPTIONS" value="true" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ThinkingInJavaDemoOperators" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.javacode.ThinkingInJavaDemoOperators" />
+      <module name="MyCodeLibrary.app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.javacode.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="java.util.prefs.Base64" />
+      <module name="MyCodeLibrary" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MyCodeLibrary" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="RandomDataUtilTest.TestRandomData" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.example.forev.mycodelibrary.usecase.RandomDataUtilTest.TestRandomData&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":app:cleanTestDebugUnitTest" />
+            <option value=":app:testDebugUnitTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Android App.app" />
+      <item itemvalue="Android Instrumented Tests.testRandomData()" />
+      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.ThinkingInJavaDemoOperators" />
+      <item itemvalue="Gradle.RandomDataUtilTest.TestRandomData" />
+      <item itemvalue="Gradle.MyCodeLibrary" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.MyCodeLibrary" />
+        <item itemvalue="Android Instrumented Tests.testRandomData()" />
+        <item itemvalue="Gradle.RandomDataUtilTest.TestRandomData" />
+        <item itemvalue="Application.ThinkingInJavaDemoOperators" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="76a17a9e-649a-4bbf-93cf-5fd40a27465b" name="Default Changelist" comment="" />
+      <created>1560924907073</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1560924907073</updated>
+    </task>
+    <task id="LOCAL-00001" summary="[feature] 添加屏幕比例界面">
+      <created>1563330866782</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1563330866782</updated>
+    </task>
+    <task id="LOCAL-00002" summary="[feature] 添加java编程思想里面的例子">
+      <created>1583412695589</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1583412695589</updated>
+    </task>
+    <task id="LOCAL-00003" summary="[feature] 调整项目成可以编译成功的样子">
+      <created>1594706122497</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1594706122497</updated>
+    </task>
+    <task id="LOCAL-00004" summary="[merge] 合并最新的代码">
+      <created>1594706388660</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1594706388660</updated>
+    </task>
+    <task id="LOCAL-00005" summary="[merge] 提交surfaceview的自学demo">
+      <created>1594717313667</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1594717313667</updated>
+    </task>
+    <task id="LOCAL-00006" summary="[feature] 提交aidl案例和motionLayout案例">
+      <created>1598324443268</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1598324443270</updated>
+    </task>
+    <task id="LOCAL-00007" summary="[feature] 提交motionLayout的应用实例">
+      <created>1598335788306</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1598335788306</updated>
+    </task>
+    <task id="LOCAL-00008" summary="[feature] 提交数据结构学习示例入口">
+      <created>1624432165174</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1624432165174</updated>
+    </task>
+    <task id="LOCAL-00009" summary="[feature] 提交数据结构学习示例入口">
+      <created>1625050656654</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1625050656654</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[feature] 添加屏幕比例界面" />
+    <MESSAGE value="[feature] 添加java编程思想里面的例子" />
+    <MESSAGE value="[feature] 调整项目成可以编译成功的样子" />
+    <MESSAGE value="[merge] 合并最新的代码" />
+    <MESSAGE value="[merge] 提交surfaceview的自学demo" />
+    <MESSAGE value="[feature] 提交aidl案例和motionLayout案例" />
+    <MESSAGE value="[feature] 提交motionLayout的应用实例" />
+    <MESSAGE value="[feature] 提交数据结构学习示例入口" />
+    <option name="LAST_COMMIT_MESSAGE" value="[feature] 提交数据结构学习示例入口" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>207</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>193</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>196</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>188</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>218</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>222</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>228</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>219</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>258</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>256</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/DanmakuActivity.java</url>
+          <line>64</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/ServiceTestAct.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
+          <line>213</line>
+          <properties class="com.example.forev.mycodelibrary.fragment.AnswerCardFra.TestOrderHelper" method="refreshViews" />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/simpleView/BatteryView.java</url>
+          <line>37</line>
+          <properties class="com.example.forev.mycodelibrary.simpleView.BatteryView" method="onDraw" />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/SingleTopAct.java</url>
+          <line>26</line>
+          <properties class="com.example.forev.mycodelibrary.SingleTopAct" method="onClick" />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MyCodeLibrary$ExampleUnitTest.ic" NAME="ExampleUnitTest Coverage Results" MODIFIED="1583411592039" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.example.forev.mycodelibrary.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>currentButtonRealIndex</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>mSelectItemIndexes.get(k)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>currentButtonRealIndex == mSelectItemIndexes.get(k)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>currentButton.getTag()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="simpleUML.UMLToolWindowPlugin">
+    <General>
+      <option name="birdViewUpdateDelay" value="2000" />
+      <option name="defaultFileLocation" value="file://$PROJECT_DIR$/.." />
+    </General>
+    <Classdiagram>
+      <option name="diagramTitleFont" value="SansSerif,1,12" />
+      <option name="diagramFont" value="SansSerif,0,10" />
+      <option name="defaultFieldsExpanded" value="false" />
+      <option name="defaultContructorsExpanded" value="false" />
+      <option name="defaultMethodsExpanded" value="false" />
+      <option name="showParameters" value="true" />
+      <option name="showTooltip" value="true" />
+      <option name="showReturnValues" value="true" />
+      <option name="longModifier" value="true" />
+      <option name="implementsBehaviour" value="1" />
+      <option name="extendsBehaviour" value="1" />
+      <option name="compartmentBehaviour" value="1" />
+      <option name="interfaceBackgroundColor" value="-6494306" />
+      <option name="abstractClassBackgroundColor" value="-1580132" />
+      <option name="classBackgroundColor" value="-6508057" />
+      <option name="diagramBackgroundColor" value="-1" />
+      <option name="useAntialiasedConnectors" value="true" />
+      <option name="quickSourceLinkColor" value="-16776961" />
+      <option name="quickDiagramLinkColor" value="-8454144" />
+      <option name="drawDecorations" value="false" />
+      <option name="hideFieldList" value="" />
+      <option name="showFieldList" value="" />
+      <option name="hideConstructorList" value="" />
+      <option name="showConstructorList" value="" />
+      <option name="hideMethodList" value="" />
+      <option name="showMethodList" value="" />
+      <option name="minimumFigureSize" value="0,0" />
+    </Classdiagram>
+    <Dependencydiagram>
+      <option name="diagramTitleFont" value="SansSerif,1,12" />
+      <option name="diagramFont" value="SansSerif,0,10" />
+      <option name="diagramBackgroundColor" value="-1" />
+      <option name="useAntialiasedConnectors" value="true" />
+      <option name="packageNameCompressionLevel" value="0" />
+    </Dependencydiagram>
+    <Packagediagram>
+      <option name="diagramTitleFont" value="SansSerif,0,12" />
+      <option name="diagramFont" value="SansSerif,0,10" />
+      <option name="packageBackgroundColor" value="-4144960" />
+      <option name="diagramBackgroundColor" value="-1" />
+      <option name="useAntialiasedConnectors" value="true" />
+      <option name="packageNameCompressionLevel" value="2" />
+    </Packagediagram>
+  </component>
+</project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.12037037037037036" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24822695035460993" />
+        <entry key="app/src/main/res/layout/activity_surface_test.xml" value="0.1728395061728395" />
+        <entry key="app/src/main/res/layout/activity_trans_aurface.xml" value="0.17994858611825193" />
+        <entry key="app/src/main/res/layout/activity_view_group_animator.xml" value="0.41354166666666664" />
+        <entry key="app/src/main/res/layout/attracted_scroll_view.xml" value="0.41354166666666664" />
+        <entry key="app/src/main/res/layout/top_view.xml" value="0.41354166666666664" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+</project>

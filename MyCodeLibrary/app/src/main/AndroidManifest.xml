@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.forev.mycodelibrary"
+    android:revisionCode="1000000201"
+    android:targetSandboxVersion="1"
+    android:versionName="1.0.1">
+
+    <application
+        android:name=".LibraryApplication"
+        android:allowClearUserData="false"
+        android:allowTaskReparenting="true"
+        android:banner="@drawable/demo1"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/demo1"
+        android:label="@string/app_name"
+        android:logo="@drawable/demo1"
+        android:manageSpaceActivity=".HookTestAct"
+        android:process=".myDemo"
+        android:resizeableActivity="false"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".SingleInstance" android:launchMode="singleInstance"/>
+        <activity
+            android:name=".SingleTaskAct"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".SingleTopAct"
+            android:launchMode="singleTop" />
+        <activity android:name=".TreeAct" />
+        <activity android:name=".DataStructAct" />
+        <activity android:name=".TouchEventTransActivity" />
+        <activity android:name=".MotionLayoutAct" />
+        <activity android:name=".AudioAndVideoAct" />
+        <activity
+            android:name=".PercentActivity"
+            android:screenOrientation="sensor" />
+        <activity android:name=".AnswerCardAct" /> <!-- <activity android:name=".ViewGroupAnimatorActivity" /> -->
+        <activity android:name=".AnimitionScaleAct" />
+        <activity
+            android:name=".MainActivity"
+            android:taskAffinity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ViewGroupAnimatorActivity" />
+        <activity android:name=".ViewListActivity" />
+        <activity
+            android:name=".AppCompatActivitySub"
+            android:label="@string/lambda"
+            android:launchMode="singleInstance"
+            android:taskAffinity=".AppCompatActivitySub" />
+        <!--
+当 activity 是 栈的根节点的时候，如果设置 android:excludeFromRecents="true" 代表不放在概览屏幕中
+        这个潜在意思是，当 你退掉或者点击显示概览屏幕的时候，当前的activity会被删除
+        -->
+        <activity android:name=".DrawableDemoAct" />
+        <activity android:name=".ReflexDemoAct" />
+        <activity android:name=".HookTestAct" />
+        <activity android:name=".ProviderTestAct" />
+        <activity android:name=".ServiceTestAct" />
+        <activity android:name=".AlgorithmTestAct" />
+        <activity android:name=".SortAlgorithmAct" />
+        <activity android:name=".SkillActivity" />
+        <activity android:name=".ThreadActivity" />
+        <activity android:name=".MemoryActivity" />
+        <activity android:name=".UserDocumentProviderTestAct" />
+        <activity android:name=".SystemImageProviderDemo" />
+        <activity android:name=".MyScrollViewActivity" />
+        <activity android:name=".AiSoundActivity" />
+        <activity android:name=".SurfaceViewActivity" />
+        <activity android:name=".SurfaceShowYUVActivity" />
+        <activity android:name=".DanmakuActivity" />
+        <activity android:name=".TouchActivity" />
+        <activity android:name=".RecycleActivity" />
+        <activity android:name=".ActivityStackAct" />
+        <activity android:name=".AndroidJetpackAct" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <service android:name=".service.ServiceTest"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.aidl.action.MY_REMOTE_SERVICE"/>
+            </intent-filter>
+        </service>
+
+        <uses-library android:name="android.test.runner" />
+    </application>
+
+    <compatible-screens>
+
+        <!-- 小屏幕各种分辨率 -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="xxhdpi"
+            android:screenSize="small" />
+        <screen
+            android:screenDensity="xxxhdpi"
+            android:screenSize="small" />
+
+        <!-- 普通大小各种分辨率 -->
+        <screen
+            android:screenDensity="ldpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="mdpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="hdpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="xhdpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="xxhdpi"
+            android:screenSize="normal" />
+        <screen
+            android:screenDensity="xxxhdpi"
+            android:screenSize="normal" />
+    </compatible-screens> <!-- 先声sdk -->
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:functionalTest="true"
+        android:handleProfiling="true"
+        android:label="test"
+        android:targetPackage="com.example.forev.mycodelibrary"
+        android:targetProcesses="*" />
+
+    <permission
+        android:name="com.example.forev.mycodelibrary.YAYALI"
+        android:description="@string/permission_des"
+        android:icon="@drawable/demo1"
+        android:label="label"
+        android:protectionLevel="dangerous" />
+
+    <permission-group
+        android:name="group"
+        android:permissionGroupFlags="personalInfo" />
+
+    <supports-gl-texture android:name="GL_EXT_texture_compression_latc" />
+
+    <supports-screens
+        android:anyDensity="false"
+        android:requiresSmallestWidthDp="160" />
+    <uses-permission android:name="com.example.forev.mycodelibrary.YAYALI" />
+    <uses-permission android:name="android.permission.READ_USER_DICTIONARY" />
+    <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+</manifest>
