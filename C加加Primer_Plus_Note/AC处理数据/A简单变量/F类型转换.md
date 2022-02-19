@@ -109,3 +109,4 @@ int main()
 
 ![Snipaste_2022-02-16_21-54-59](/assets/Snipaste_2022-02-16_21-54-59.png )
 
+## C++ 中的auto
