@@ -137,3 +137,45 @@ getline函数有一个特点是，他会在读取指定字数的字符或者遇�
 ![Snipaste_2022-02-20_16-19-31](/assets/Snipaste_2022-02-20_16-19-31.png)
 
 #### get 读取一行并保留换行符
+
+istream 类中另一个名为get()的成员函数，该函数意思是， 读取一行 以及其后面的换行符。这个函数有几个变体， 其中一个变体的工作方式与getLine()是类似的，他们接受的参数相同，解释参数的方式也是相同的，并且都读取到行尾，但是get不仅会读取后面的换行符，而且还不会因此丢弃这个换行符，而是将其留在输入队列中，所以会有一个奇怪的现象：
+```c++
+cin.get(name, size);
+cin.get(dessert, size); //就在这里会出问题的！
+```
+刚刚说的出问题的点就是，第二行会把之前保留的那个换行符作为dessert的输入，从而控制台不会给你任何机会让你录入第二个数字的！
+
+但是幸运的是，get函数还有一个变体，使用不带任何参数的方法 cin.get()， 便会读取下一个字符，因此用它来处理换行符，为读取下一行做准备，也就是说，我们可以这样调用：
+```c++
+cin.get(name, size);
+cin.get();
+cin.get(dessert, size);
+```
+
+也可以链式写：
+
+```c++
+cin.get(name, size).get();
+```
+
+```C++
+#include<iostream>
+using namespace std;
+int main()
+{
+    const int size = 20;
+    char name[size];
+    char dessert[size];
+
+    cout << "Please Enter Your name!" << endl;  //故意输入过长的参数照样会出问题的。
+    cin.get(name, size).get();
+
+    cout << "Please enter your faverate fold!" << endl;
+    cin.get(dessert, size).get();
+
+    cout << "Your name is: " << name << "And your faverate fold is: " << dessert << endl;
+
+    return 0;
+}
+```
+
