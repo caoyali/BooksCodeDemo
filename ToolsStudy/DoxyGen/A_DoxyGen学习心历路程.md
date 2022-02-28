@@ -65,6 +65,10 @@ sa   see also 的简写，不知道java好不好用
 # 使用前配置修改
 ## 生成配置文件
 **doxygen -g <config-file>** 生成一个配置文件，这个很简单
+## 改参数
+JAVADOC_AUTOBRIEF  = YES 这个是加简介的方法，但是我觉得这个加上去更丑了
+JAVADOC_BANNER = YES  展示方法简介
+RECURSIVE = YES  递归
 
 # 格式相关常用
 ### group
@@ -96,3 +100,9 @@ sa   see also 的简写，不知道java好不好用
 
 ![Snipaste_2022-02-23_14-42-29](/assets/Snipaste_2022-02-23_14-42-29.png)
 ### 换行
+
+### 扩展
+关于高级命令， 看这个链接
+https://www.doxygen.nl/manual/commands.html#cmdwarning
+
+顺便说一下，你自己写命令不一定非得写 \note啥的， 亲测你就算写成 @note 也是可以的，在javadoc注解风格下。
