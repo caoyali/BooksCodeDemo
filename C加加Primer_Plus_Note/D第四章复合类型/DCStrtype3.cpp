@@ -13,12 +13,12 @@ int main()
     strcpy(charr1, charr2); // 老式写法只能对老式写法用？
     // strcpy(str1, str2);  好吧，果然是老式写法只能对老式写法。我勒个去！
     str1 += " paste";
-    strcat(charr1, " juice");
+    strcat(charr1, " juice"); //向后追加字符串
 
     int len1 = str1.size(); //c++ string写法
     int len2 = strlen(charr1); //C语言写法 
 
     cout << "The string " << str1 << " contains " << len1 << " characters" << endl;
     cout << "The string " << charr1 << " contains" << len2 << " characers" << endl; 
-    return 0;
+    return 0; 
 }

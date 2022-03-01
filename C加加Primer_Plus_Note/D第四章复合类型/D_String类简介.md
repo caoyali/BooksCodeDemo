@@ -65,8 +65,79 @@ string有哪些便捷的用法呢？
   ```
 
   ## string类的其他操作
-  在C++新增string类之前，程序员也需要完成诸如给字符串赋值等工作。 对于C等个字符串，程序员使用C语言库中的函数来完成这些任务。 头文件cstring（以前为string.h）提供了这些函数
+  在C++新增string类之前，程序员也需要完成诸如给字符串赋值等工作。 对于C等个字符串，程序员使用C语言库中的函数来完成这些任务。 头文件cstring（以前为string.h）提供了这些函数， 拷贝字符串， 和追加字符串
+  ```C++
+  strcpy(str1, str2); // 将str2的内容拷贝到str1中，仅适用C语言中的用法
+  strcat(str1, str2); // 将str2中的内容追加到str1的后面，仅适用C语言中的用法。我们项目老这样用，是不是他们根本没学C++？
+  ```
 
+  ```C++
+  #include <iostream>
+  #include <string>
+  #include <cstring>
+  using namespace std;
+  int main()
+  {
+      char charr1[20];  //c语言老式写法
+      char charr2[20] = "jaguar"; // C语言老式写法
+      string str1;
+      string str2 = "panther";
+
+      str1 = str2;
+      strcpy(charr1, charr2); // 老式写法只能对老式写法用？
+      // strcpy(str1, str2);  好吧，果然是老式写法只能对老式写法。我勒个去！
+      str1 += " paste";
+      strcat(charr1, " juice"); //向后追加字符串
+
+      int len1 = str1.size(); //c++ string写法
+      int len2 = strlen(charr1); //C语言写法 
+
+      cout << "The string " << str1 << " contains " << len1 << " characters" << endl;
+      cout << "The string " << charr1 << " contains" << len2 << " characers" << endl; 
+      return 0; 
+  }
+  ```
   ## string类IO
+
+  下面的例子中，我自己写着写着不知道怎么输入 str 了， 我一度觉得自己白学了， 后来看看书发现，对于C++中的 string 怎么在控制台进行输入，就是本段落目的。 怪不得我觉得自己知道，但是实际上写不出来！原来是没有学过。但是仍然有一些细节需要注意一下。 就比如初始化carry之后不是立即打印了这个的内容长度了么？
+  尽管我的电脑上打印的都是0， 但是可能由于执行机器的区别，导致实际上我的打印和书上的是不一致！
+  ```C++
+    #include<iostream>
+  #include<string>
+  #include<cstring>
+
+  int main() {
+      using namespace std;
+
+      char carry[20];
+      string str;
+      // 这行开始的时候有问题，是为什么呢？嗷嗷， 原因是我开始的时候定义的carry是int数组， 这个当然不行喽， 因为C++只会把char数组认为是字符串！ 一步一坑，这个坑是挺好的！
+      cout << "The origin length of carry is: " << strlen(carry) << endl;
+      cout << "The origin length of str is: " << str.size() << endl;
+
+      //endl是啥意思来着？和 \n 的区别是什么呢？
+      // endl 可以在程序继续执行之前保证刷新屏幕，但是 \n 却不会刷新屏幕。 如果你心疼刷新屏幕那点性能的话，那就不要用endl控制符了！
+      cout << "Please input carry!" << endl;
+      cin.getline(carry, sizeof carry / sizeof carry[0]);
+      cout << "U have input carry with: " << carry << "\n";
+      cout << "Please inpute str! \n";
+      // str怎么输入来着？我忘了我靠！！！！！
+      // cin.getline(str);
+      getline(cin, str); // 对于C++送提供的 string 获取一行的方法是一个专门的方法
+      cout << "U have input str with: " << str << "\n";
+
+      cout << "The length of carry is : " << strlen(carry) << "\n";
+      cout << "The length of str is : " << str.size() << "\n";
+   }
+  ```
+  ![Snipaste_2022-03-01_14-43-14](/assets/Snipaste_2022-03-01_14-43-14.png)
+
+  但是书上的打印是：
+
+  ![Snipaste_2022-03-01_14-44-45](/assets/Snipaste_2022-03-01_14-44-45.png)
+
+那么对于这种问题的原因是什么呢？
+- 初始化之前的char数组都是没有定义的，他里面的内容可以是内存上的任意内容！
+- 函数strlen 内部的计算逻辑是以空字符为结束，进行计算，所以针对上一条来讲，我哪里知道到什么时候才能碰到空字符呢？说句实话其实是可以出现在任意地方的。 这就导致它计算出来的长度是任意的。<font color=red>我又想吐槽一句，C++真他妈垃圾！</font>
 
   ## 其他形式的字符串字面值
