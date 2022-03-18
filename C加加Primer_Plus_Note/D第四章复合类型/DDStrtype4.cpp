@@ -25,6 +25,4 @@ int main() {
     cout << "The length of carry is : " << strlen(carry) << "\n";
     cout << "The length of str is : " << str.size() << "\n";
 
-
-
 }
