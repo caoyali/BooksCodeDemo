@@ -171,3 +171,65 @@ int main() {
 ### 空指针
 值为0的指针为空指针，所以你会看见别人代码里面为啥有一堆判断是否为0的东西。其实是在判断空指针
 
+### delete 释放内存
+
+```c++
+int* p_int = new int;
+....
+delete p_int;
+```
+delete的意思是释放 指针所指向的内存。但并不意味着指针自此没了这个指针可以再被赋值应用！ delete在使用的时候一定记得和new关键字配对使用！否则会引发严重的内存泄漏问题。
+对了，如果你释放一个已经被释放过了的内存区域，照样也会出错。。我觉得限制这么多，这家伙能好使么！另外，你同时也不能delete来释放声明变量所获得的的内存。
+条条框框的，我都敬而远之了要，这也不行那也不行，这样出错那样出错，提供一个这么难用的东西干嘛。
+
+- 不要使用delete来释放不是new分配的内存
+- 不要使用delete来释放同一个内存块两次
+- 如果使用new[] 为数组分配内存，则应该使用 delete[]来释放
+- 如果使用new 为一个实体分配内存，则应该使用delete来释放
+- 对空指针应用delete是安全的！
+
+我们上面提到了数组和方括号，是这样的，数组也是可以new出来的，但是new的时候语法有点不一样
+```C++
+int* pt = new int[100];
+```
+这样的话在delete的时候，务必也加上方括号，以释放的是全部的数组，而不仅仅是指针的位置。
+```C++
+delete [] pt;
+```
+
+**我有一个疑惑就是，delete之后处理的指针，既然还能被再赋值，那么当再赋值之前，它自己是什么呢？它指向的地址的内容又是什么呢？我们不妨自己写一个例子试一下**
+我自己写了个例子发现有些奇怪!
+
+```c++
+#include<iostream>
+int main() {
+    int a = 15;
+    int* p_int = &a;
+
+    using namespace std;
+    cout << "a's addr=" << &a << endl;
+    cout << "---------------not new -----------------------" << endl;
+    cout << "p_int = " << p_int << "And p_int's content=" << *p_int << endl;
+
+    int* p_bint = new int;
+    *p_bint = a;
+    cout << "---------------new -----------------------"<< endl;
+    cout << "p_bint=" << p_bint << " and p_bint's content=" << *p_bint << endl;
+    cout << "---------------delete p_bint----------------------"<< endl;
+    delete p_bint;
+    // 尽管我已经释放了但是打印出来的结果依然跟没有释放前似的，一切都是正常的，我感觉有点奇怪这里！！！所以内部到底发生了什么呀，难道是加了一个标志位？
+    cout << "after delete p_bint, p_bint=" << p_bint << endl;
+    cout << "after delete p_bint, *p_bint=" << *p_bint << endl;
+
+    cout << "---------------new int array-----------------------"<< endl;
+    int* p_cArray = new int[3];
+    *p_cArray = 1;
+    *(p_cArray + 1) = 2;![Snipaste_2022-03-25_11-23-35](/assets/Snipaste_2022-03-25_11-23-35.png)
+    *(p_cArray + 2) = 3;
+
+    cout << "p_cArray=" << p_cArray << " p_cArray's content=" << *p_cArray << endl;
+    return 0;
+}
+```
+
+![Snipaste_2022-03-25_11-24-14](/assets/Snipaste_2022-03-25_11-24-14.png)
