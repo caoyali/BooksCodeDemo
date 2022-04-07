@@ -24,7 +24,7 @@ cout << "U have init in1! in1.name=" << in1.name << endl;
 ```C++
 inflateble* p_inf1 = new inflateble; //这样就算是初始化了一个指针了，你给了类型，初始化之后，至少运行的时候，人家知道你内存的位置在哪里，并且多大都是知道的。
 ```
-但是我们如何访问它的参数呢？就那个  name  price ？ 这里有个细节需要我们记住一下！ 就是 ，你用new初始化的，内存的第一个位置叫 p_inf1， 它存储的内容，是inflateble 的一个地址而已，但是  inflateble 的名字叫啥呢？？你是不是发现从始至终你都没有给过呀! 你连名字都没有办法拿到，靠直接点出来，是不合规的！！在C++的体系内知道是”它“无法理解的事情。 为了解决这种问题， C++提供了一个 **<font color=grren>-></font>** 符号。这个符号就是我之前傻傻分不清的符号，我不知道用点，还是用这个，每次都很慌。C++就是借此来进行区分的！你是一块内存名，那么就用点，但是如果你是一个指针名，那么我捞不到内存名， 于是你就用 -> 这样我底层就自然会对这个做出相应的决策，最后让你算对！
+但是我们如何访问它的参数呢？就那个  name  price ？ 这里有个细节需要我们记住一下！ 就是 ，你用new初始化的，内存的第一个位置叫 p_inf1， 它存储的内容，是inflateble 的一个地址而已，但是  inflateble 的名字叫啥呢？？你是不是发现从始至终你都没有给过呀! 你连名字都没有办法拿到，靠直接点出来，是不合规的！！在C++的体系内知道是”它“无法理解的事情。 为了解决这种问题， C++提供了一个 **<font color=green>-></font>** 符号。这个符号就是我之前傻傻分不清的符号，我不知道用点，还是用这个，每次都很慌。C++就是借此来进行区分的！你是一块内存名，那么就用点，但是如果你是一个指针名，那么我捞不到内存名， 于是你就用 -> 这样我底层就自然会对这个做出相应的决策，最后让你算对！
 
 但是我们依然还有另外一种写法， 我先提前说说最后给出例子！  *指针，，的意思不就是这块内存的内容么，它虽然不知道名字叫啥，反正你能通过这种方式直接访问内存呀？？？其实你也可以这样反向操作点出来！
 所以访问数据是有两种方式的：
@@ -35,3 +35,68 @@ p_inf1 -> name;
 // 第二种方式
 (*p_inf1).name;   //都是可以的！
 ```
+
+## 关于花式访问结构内容的例子
+```C++
+#include <iostream>
+using namespace std;
+int main()
+{
+    struct Inflatable{
+        string name;
+        float volume;
+        float price;
+    };
+
+    Inflatable* in1 = new Inflatable;
+    cout << "Please Enter name:" << endl;
+    // cin.get(in1 -> name, 20); //这样写不行，但是书上就是这么写的。这个C++是特么怎么回事啊！
+    cin >> in1 -> name;
+    cout << "Please Enter volume" << endl;
+    cin >> (*in1).volume;
+    cout << "Please Enter price" << endl;
+    cin >> in1->price;
+
+    cout << "Name=" << in1 -> name << endl;
+    cout << "Volume=" << (*in1).volume << endl;
+    cout << "Price=" << in1 -> price << endl;
+
+    delete in1;
+
+    return 0;
+}
+```
+![Snipaste_2022-04-07_12-51-48](/assets/Snipaste_2022-04-07_12-51-48.png)
+
+# new与delete写一个输入字串的案例
+
+```C++
+#include <iostream>
+char* getName();
+int main()
+{
+    using namespace std;
+    char* name1 = getName();
+    cout << "name1=" << name1 << endl;
+    cout << "name1's dess=" << (int*) name1 << endl;
+    delete [] name1;
+    delete [] name1; //这里会引发崩溃， 不能连续delete两次
+    cout << "after delete name1's content=" << *name1 << endl;
+
+    char* name2 = getName();
+    cout << "name2=" << name2 << endl;
+    cout << "name2's dess=" << (int*) name2 << endl;
+    delete [] name2;
+    return 0;
+}
+
+char* getName()
+{
+    using namespace std;
+    cout << "Please enter a name: " << endl;
+    char* name = new char[70];
+    cin >> name;
+    return name;
+}
+```
+我的运行结果呀，跟想象的不是很一样，重点在于那个 delete 一个指针之后的打印，我的MAC打印出来的竟然是我输入的第一个字符， 但是我把代码粘贴到了一个网络上的执行器上打印的和书中的一模一样，我这里其实是比较奇怪的，难道MAC有另一个版本的C++？或者，我的编译器有点奇怪？？这个问题啊真的是有点奇怪啊。不过我暂且不追这个问题了，记住这块，兴许未来某一天，我可以很自然的找到这个答案。
