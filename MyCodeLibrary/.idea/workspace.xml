@@ -18,7 +18,7 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
@@ -95,9 +95,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76a17a9e-649a-4bbf-93cf-5fd40a27465b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../C加加Primer_Plus_Note/D第四章复合类型/G指针/D_指针与结构/A使用new来创建动态结构.md" beforeDir="false" afterPath="$PROJECT_DIR$/../C加加Primer_Plus_Note/D第四章复合类型/G指针/D_指针与结构/A使用new来创建动态结构.md" afterDir="false" />
-    </list>
+    <list default="true" id="76a17a9e-649a-4bbf-93cf-5fd40a27465b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -133,9 +131,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
+        <option value="Kotlin Class" />
         <option value="layoutResourceFile" />
         <option value="Class" />
-        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -157,7 +155,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DEBUGGABLE_DEVICE" value="huawei-ele_al00-8KE5T19702040170" />
+    <property name="DEBUGGABLE_DEVICE" value="oneplus-mt2110-4037313a" />
     <property name="DEBUGGABLE_PROCESS" value=".myDemo" />
     <property name="DEBUGGER_ID" value="Auto" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3_XL_API_29_pad" />
@@ -166,6 +164,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="android-custom-view/Users/admin/my_github/BooksCodeDemo/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MyGroupView.java_MyGroupView_DIMENSIONS" value="1080&#10;1920" />
+    <property name="android-custom-view/Users/admin/my_github/BooksCodeDemo/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MyGroupView.java_SELECTED" value="MyGroupView" />
+    <property name="android-custom-view/Users/admin/my_github/BooksCodeDemo/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MyView.java_MyView_DIMENSIONS" value="1080&#10;1920" />
+    <property name="android-custom-view/Users/admin/my_github/BooksCodeDemo/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/MyView.java_SELECTED" value="MyView" />
+    <property name="android-custom-view/Users/admin/my_github/BooksCodeDemo/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/TouchedView.java_SELECTED" value="TouchedView" />
+    <property name="android-custom-view/Users/admin/my_github/BooksCodeDemo/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/TouchedView.java_TouchedView_DIMENSIONS" value="1080&#10;1920" />
+    <property name="android-custom-view/Users/admin/my_github/BooksCodeDemo/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/ViewPreview.java_SELECTED" value="ViewPreview" />
+    <property name="android-custom-view/Users/admin/my_github/BooksCodeDemo/MyCodeLibrary/app/src/main/java/com/example/forev/mycodelibrary/view/ViewPreview.java_ViewPreview_DIMENSIONS" value="1080&#10;1920" />
     <property name="android-custom-view/Users/caoyali/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.8.3/f547a950fc07d4820dbbdca90a42ecd7696f85b0/DanmakuFlameMaster-0.8.3-sources.jar!/master/flame/danmaku/ui/widget/DanmakuSurfaceView.java_SELECTED" value="DanmakuSurfaceView" />
     <property name="android-custom-view/Users/caoyali/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.8.3/f547a950fc07d4820dbbdca90a42ecd7696f85b0/DanmakuFlameMaster-0.8.3-sources.jar!/master/flame/danmaku/ui/widget/DanmakuTextureView.java_SELECTED" value="DanmakuTextureView" />
     <property name="android-custom-view/Users/caoyali/.gradle/caches/modules-2/files-2.1/com.github.ctiao/DanmakuFlameMaster/0.8.3/f547a950fc07d4820dbbdca90a42ecd7696f85b0/DanmakuFlameMaster-0.8.3-sources.jar!/master/flame/danmaku/ui/widget/DanmakuView.java_SELECTED" value="DanmakuView" />
@@ -593,59 +599,9 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>207</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>193</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>196</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>188</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>218</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>222</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>228</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>219</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>258</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>256</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/DanmakuActivity.java</url>
-          <line>64</line>
+          <line>65</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
@@ -653,11 +609,10 @@
           <line>20</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/fragment/AnswerCardFra.java</url>
-          <line>213</line>
-          <properties class="com.example.forev.mycodelibrary.fragment.AnswerCardFra.TestOrderHelper" method="refreshViews" />
-          <option name="timeStamp" value="13" />
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/AudioAndVideoAct.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forev/mycodelibrary/simpleView/BatteryView.java</url>

@@ -8,7 +8,7 @@ import com.constraint.CoreProvideTypeEnum;
 import com.constraint.ResultBody;
 import com.example.forev.mycodelibrary.constant.Config;
 import com.example.forev.mycodelibrary.constant.UserInfoConfig;
-import com.example.forev.mycodelibrary.utils.LogUtil;
+import com.example.forev.mycodelibrary.utils.MCLLog;
 import com.xs.BaseSingEngine;
 import com.xs.SingEngine;
 import com.xs.impl.OnEndCallback;
@@ -48,7 +48,7 @@ public class AiSoundActivity extends BaseActivity {
         mResultListener = new BaseSingEngine.ResultListener() {
             @Override
             public void onBegin() {
-                LogUtil.get().d("onBegin");
+                MCLLog.d("onBegin");
             }
 
             @Override

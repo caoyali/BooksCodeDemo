@@ -1,7 +1,7 @@
 package com.example.forev.mycodelibrary;
 
 import com.example.forev.mycodelibrary.utils.DanmakuConfigUtil;
-import com.example.forev.mycodelibrary.utils.LogUtil;
+import com.example.forev.mycodelibrary.utils.MCLLog;
 
 import butterknife.BindView;
 import master.flame.danmaku.controller.DrawHandler;
@@ -12,6 +12,7 @@ import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
 import master.flame.danmaku.ui.widget.DanmakuView;
 
 public class DanmakuActivity extends BaseActivity {
+    private static final String TAG = "DanmakuActivity";
     @BindView(R.id.mDanmakuView)
     DanmakuView mDanmaku;
 
@@ -29,23 +30,23 @@ public class DanmakuActivity extends BaseActivity {
         mDanmaku.setCallback(new DrawHandler.Callback() {
             @Override
             public void prepared() {
-                LogUtil.get().d("弹幕准备了！");
+                MCLLog.d("弹幕准备了！");
                 mDanmaku.start();
             }
 
             @Override
             public void updateTimer(DanmakuTimer timer) {
-//                LogUtil.get().d("updateTimer");
+//                MCLLog.d("updateTimer");
             }
 
             @Override
             public void danmakuShown(BaseDanmaku danmaku) {
-                LogUtil.get().d("danmakuShown");
+                MCLLog.d("danmakuShown");
             }
 
             @Override
             public void drawingFinished() {
-                LogUtil.get().d("drawingFinished");
+                MCLLog.d("drawingFinished");
             }
         });
 

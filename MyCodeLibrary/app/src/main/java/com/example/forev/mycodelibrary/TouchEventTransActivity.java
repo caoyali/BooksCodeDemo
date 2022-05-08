@@ -2,7 +2,7 @@ package com.example.forev.mycodelibrary;
 
 import android.view.View;
 
-import com.example.forev.mycodelibrary.utils.LogUtil;
+import com.example.forev.mycodelibrary.utils.MCLLog;
 import com.example.forev.mycodelibrary.view.MyGroupView;
 import com.example.forev.mycodelibrary.view.MyView;
 
@@ -39,7 +39,7 @@ public class TouchEventTransActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.myView2:
-                LogUtil.get().d("view 点击了黄色按钮");
+                MCLLog.d("view 点击了黄色按钮");
                 break;
         }
     }

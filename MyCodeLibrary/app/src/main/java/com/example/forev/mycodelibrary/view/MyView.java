@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.example.forev.mycodelibrary.utils.LogUtil;
+import com.example.forev.mycodelibrary.utils.MCLLog;
 
 public class MyView extends android.support.v7.widget.AppCompatTextView {
     private String TAG = "";
@@ -26,17 +26,17 @@ public class MyView extends android.support.v7.widget.AppCompatTextView {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        LogUtil.get().d(TAG + "开始分发 ev=" + ev);
+        MCLLog.d(TAG + "开始分发 ev=" + ev);
         boolean b = super.dispatchTouchEvent(ev);
-        LogUtil.get().d(TAG + "结束分发， result=" + b);
+        MCLLog.d(TAG + "结束分发， result=" + b);
         return b;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        LogUtil.get().d(TAG + "开始onTouchEvent ev=" + event);
+        MCLLog.d(TAG + "开始onTouchEvent ev=" + event);
         boolean b = super.onTouchEvent(event);
-        LogUtil.get().d(TAG + "结束onTouchEvent result=" + b);
+        MCLLog.d(TAG + "结束onTouchEvent result=" + b);
         return b;
     }
 }

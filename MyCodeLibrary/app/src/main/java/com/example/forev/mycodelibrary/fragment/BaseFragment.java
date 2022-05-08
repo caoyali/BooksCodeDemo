@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.forev.mycodelibrary.utils.LogUtil;
+import com.example.forev.mycodelibrary.utils.MCLLog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -19,21 +19,21 @@ import butterknife.Unbinder;
 
 abstract class BaseFragment extends Fragment {
     private Unbinder mUnbinder;
-    private View mRootView;
+    protected View mRootView;
 
     abstract protected int getLayoutId();
     abstract protected void initView(View rootView);
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        LogUtil.get().d(this + " onCreate()...");
+        MCLLog.d(this + " onCreate()...");
         super.onCreate(savedInstanceState);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtil.get().d(this + " onCreateView()...");
+        MCLLog.d(this + " onCreateView()...");
         mRootView = View.inflate(getContext(), getLayoutId(), null);
         mUnbinder = ButterKnife.bind(mRootView);
         initView(mRootView);
@@ -42,43 +42,43 @@ abstract class BaseFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        LogUtil.get().d(this + " onViewCreated()...");
+        MCLLog.d(this + " onViewCreated()...");
         super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        LogUtil.get().d(this + " onActivityResult()...");
+        MCLLog.d(this + " onActivityResult()...");
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onStart() {
-        LogUtil.get().d(this + " onStart()...");
+        MCLLog.d(this + " onStart()...");
         super.onStart();
     }
 
     @Override
     public void onResume() {
-        LogUtil.get().d(this + " onResume()...");
+        MCLLog.d(this + " onResume()...");
         super.onResume();
     }
 
     @Override
     public void onStop() {
-        LogUtil.get().d(this + " onStop()...");
+        MCLLog.d(this + " onStop()...");
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        LogUtil.get().d(this + " onPause()...");
+        MCLLog.d(this + " onPause()...");
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        LogUtil.get().d(this + " onDestroy()...");
+        MCLLog.d(this + " onDestroy()...");
         super.onDestroy();
         if (null != mUnbinder) {
             mUnbinder.unbind();

@@ -1,8 +1,6 @@
 package com.example.forev.mycodelibrary;
 
-import android.util.Log;
-
-import com.example.forev.mycodelibrary.utils.LogUtil;
+import com.example.forev.mycodelibrary.utils.MCLLog;
 import com.example.forev.mycodelibrary.utils.RandomDataUtil;
 
 import java.util.Arrays;
@@ -22,8 +20,8 @@ public class TreeAct extends BaseActivity {
         mOriginNumbers = RandomDataUtil.randomData(10, 100);
         mRootNode = new TreeNode(mOriginNumbers[0]);
         createBinaryTree(mOriginNumbers);
-        LogUtil.get().d("原始数据为：" + Arrays.toString(mOriginNumbers));
-        LogUtil.get().d(mRootNode.toString());
+        MCLLog.d("原始数据为：" + Arrays.toString(mOriginNumbers));
+        MCLLog.d(mRootNode.toString());
     }
 
     private void createBinaryTree(int[] originNumbers) {

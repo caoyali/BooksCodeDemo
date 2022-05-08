@@ -5,7 +5,7 @@ import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.example.forev.mycodelibrary.utils.LogUtil;
+import com.example.forev.mycodelibrary.utils.MCLLog;
 
 public class MyGroupView extends ConstraintLayout {
     private String TAG = "";
@@ -27,25 +27,25 @@ public class MyGroupView extends ConstraintLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        LogUtil.get().d(TAG + "开始分发 ev=" + ev);
+        MCLLog.d(TAG + "开始分发 ev=" + ev);
         boolean b = super.dispatchTouchEvent(ev);
-        LogUtil.get().d(TAG + "结束分发， result=" + b);
+        MCLLog.d(TAG + "结束分发， result=" + b);
         return b;
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        LogUtil.get().d(TAG + "开始拦截 ev=" + ev);
+        MCLLog.d(TAG + "开始拦截 ev=" + ev);
         boolean b =  super.onInterceptTouchEvent(ev);
-        LogUtil.get().d(TAG + "结束拦截， result=" + b);
+        MCLLog.d(TAG + "结束拦截， result=" + b);
         return b;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        LogUtil.get().d(TAG + "开始onTouchEvent ev=" + event);
+        MCLLog.d(TAG + "开始onTouchEvent ev=" + event);
         boolean b = super.onTouchEvent(event);
-        LogUtil.get().d(TAG + "结束onTouchEvent result=" + b);
+        MCLLog.d(TAG + "结束onTouchEvent result=" + b);
         return b;
     }
 }

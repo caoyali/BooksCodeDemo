@@ -1,69 +1,15 @@
 package com.example.forev.mycodelibrary;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.view.View;
+
+import com.example.forev.mycodelibrary.fragment.CameraUsingFra;
+
+import butterknife.OnClick;
 
 public class AudioAndVideoAct extends BaseActivity {
-
-    /*fu!! 这篇实在是看不懂啊！*/
-
-
-////    private IntentFilter intentFilter = new IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY);
-////
-////    private AudioManager.OnAudioFocusChangeListener afChangeListener;
-////    private BecomingNoisyReceiver myNoisyAudioStreamReceiver = new BecomingNoisyReceiver();
-////    private MediaSyleNotification myPlayerNotification;
-////    private MediaSessionCompat mediaSession;
-////    private MediaBrowserService service;
-////    private SomeKindOfPlayer player;
-////    AudioFocusRequest audioFocusRequest;
-//
-//    MediaSessionCompat.Callback callback = new MediaSessionCompat.Callback() {
-//        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-//        @Override
-//        public void onPlay() {
-////            AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-////            //request audio focus for playback, this registers the afChangeListener
-////            AudioAttributes attrs = (new AudioAttributes.Builder()
-////                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC))
-////                    .build();
-////            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-////                audioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
-////                        .setOnAudioFocusChangeListener(afChangeListener)
-////                        .setAudioAttributes(attrs)
-////                        .build();
-////            }
-////            int result = am.requestAudioFocus(audioFocusRequest);
-////            if (AudioManager.AUDIOFOCUS_REQUEST_GRANTED == result) {
-////                startService(new Intent(this, MediaBrowserService.class));
-////                mediaSession.setActive(true);
-////                player.start();
-////                registerReceiver(myNoisyAudioStreamReceiver, intentFilter);
-////                service.startForeground(id, myPlayerNotification);
-////            }
-//        }
-//
-//        @Override
-//        public void onPause() {
-////            AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-////            player.pause();
-////            unregisterReceiver(myNoisyAudioStreamReceiver);
-////            service.stopForeground(false);
-//        }
-//
-//        @Override
-//        public void onStop() {
-////            AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-////            //Abandon audio focus
-////            am.abandonAudioFocusRequest(audioFocusRequest);
-////            unregisterReceiver(myNoisyAudioStreamReceiver);
-////            service.stopSelf();
-////            mediaSession.setActive(false);
-////            player.stop();
-////            service.stopForeground(false);
-//        }
-//    };
-
+    private CameraUsingFra mCameraUsingFra;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_audeo_and_video;
@@ -71,6 +17,24 @@ public class AudioAndVideoAct extends BaseActivity {
 
     @Override
     protected void initView() {
+    }
 
+    @OnClick({R.id.mCamera})
+    void onClick(View v){
+        switch (v.getId()) {
+            case R.id.mCamera:
+                if (null == mCameraUsingFra) {
+                    mCameraUsingFra = new CameraUsingFra();
+                }
+                openFragment(mCameraUsingFra, "mCameraUsingFra", R.id.mRootView);
+                break;
+        }
+    }
+
+    private void openFragment(Fragment fragment, String tag, int id){
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().add(id, fragment, tag)
+                .addToBackStack("AudioAndVideoAct")
+                .commitAllowingStateLoss();
     }
 }

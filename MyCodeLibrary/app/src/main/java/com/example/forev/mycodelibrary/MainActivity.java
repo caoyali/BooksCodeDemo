@@ -71,9 +71,9 @@ public class MainActivity extends BaseActivity{
             case R.id.mAudioAndVideo:
                 openActivity(AudioAndVideoAct.class);
                 break;
-            case R.id.mAndroidJetPack:
-                openActivity(AndroidJetpackAct.class);
-                break;
+//            case R.id.mAndroidJetPack:
+//                openActivity(AndroidJetpackAct.class);
+//                break;
         }
     }
 
