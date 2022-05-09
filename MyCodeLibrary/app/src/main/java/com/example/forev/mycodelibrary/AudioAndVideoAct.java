@@ -26,7 +26,7 @@ public class AudioAndVideoAct extends BaseActivity {
                 if (null == mCameraUsingFra) {
                     mCameraUsingFra = new CameraUsingFra();
                 }
-                openFragment(mCameraUsingFra, "mCameraUsingFra", R.id.mRootView);
+                openFragment(mCameraUsingFra, "mCameraUsingFra", R.id.mFraPanel);
                 break;
         }
     }

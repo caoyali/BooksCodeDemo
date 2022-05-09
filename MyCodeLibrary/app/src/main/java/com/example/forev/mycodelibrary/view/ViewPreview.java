@@ -5,6 +5,7 @@ import android.hardware.Camera;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
@@ -23,8 +24,12 @@ public class ViewPreview extends FrameLayout implements SurfaceHolder.Callback {
     private SurfaceView mSurfaceView;
     private SurfaceHolder mHolder;
     private Camera mCamera;
-    private List<Camera.Size> mSupportedPreviewSizes;
+
     public ViewPreview(Context context) {
+        super(context);
+    }
+
+    public ViewPreview(Context context, Camera camera) {
         super(context);
         mSurfaceView = new SurfaceView(context);
         mSurfaceView.setLayoutParams(new ViewGroup.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
@@ -33,11 +38,11 @@ public class ViewPreview extends FrameLayout implements SurfaceHolder.Callback {
         mHolder = mSurfaceView.getHolder();
         mHolder.addCallback(this);
         mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        this.mCamera = camera;
     }
 
     public ViewPreview(Context context, AttributeSet attrs) {
         this(context);
-        MCLLog.i(TAG, "看看走没走到这一行");
     }
 
     public ViewPreview(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -47,41 +52,16 @@ public class ViewPreview extends FrameLayout implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         MCLLog.v(TAG, "");
+        mCamera.autoFocus(new Camera.AutoFocusCallback() {
+            @Override
+            public void onAutoFocus(boolean b, Camera camera) {
+                MCLLog.i(TAG, "b=" + b);
+            }
+        });
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-//        MCLLog.v(TAG, "");
-//        // Now that the size is known, set up the camera parameters and begin
-//        // the preview.
-//        Camera.Parameters parameters = mCamera.getParameters();
-////        parameters.setPreviewSize(mSupportedPreviewSizes.width, mSupportedPreviewSizes.height);
-//        requestLayout();
-//        mCamera.setParameters(parameters);
-//
-//        // Important: Call startPreview() to start updating the preview surface.
-//        // Preview must be started before you can take a picture.
-//        try {
-//            mCamera.setPreviewDisplay(mHolder);
-//        } catch (Exception e) {
-//            MCLLog.e(TAG, "e=" + e);
-//        }
-//        mCamera.startPreview();
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
-    }
-
-    public void setCamera(Camera camera) {
-        if (mCamera == camera) {
-            return;
-        }
-
-        mCamera = camera;
-
-
         MCLLog.v(TAG, "");
         // Now that the size is known, set up the camera parameters and begin
         // the preview.
@@ -97,20 +77,18 @@ public class ViewPreview extends FrameLayout implements SurfaceHolder.Callback {
         } catch (Exception e) {
             MCLLog.e(TAG, "e=" + e);
         }
+
+
         mCamera.startPreview();
 
-//        if (null != mCamera) {
-//            List<Camera.Size> localSizes = mCamera.getParameters().getSupportedPreviewSizes();
-//            mSupportedPreviewSizes = localSizes;
-//            requestLayout();
-//
-//            try {
-//                mCamera.setPreviewDisplay(mHolder);
-//            } catch (Exception e) {
-//                MCLLog.e(TAG, "e=" + e);
-//            }
-//
-//            mCamera.startPreview();
-//        }
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+        MCLLog.v(TAG, "");
+        if (null != mCamera) {
+            mCamera.stopPreview();
+            mCamera.release();
+        }
     }
 }
