@@ -28,66 +28,86 @@ public class CameraUsingFra extends BaseFragment implements View.OnClickListener
     private ViewPreview mPreview;
     private FrameLayout mPreviewContainer;
     private TextView mTakePhotoBt;
+/**
+    http://www.android-doc.com/reference/android/hardware/Camera.html 这个地址里面讲的挺清楚的
+  首先用照相机前，不要忘了向系统声明一些权限。这种是无论你用那种API都不可避免的一些代码
+  <uses-permission android:name="android.permission.CAMERA" />
+  <uses-feature android:name="android.hardware.camera" />
+  <uses-feature android:name="android.hardware.camera.autofocus" />
 
-//    http://www.android-doc.com/reference/android/hardware/Camera.html 这个地址里面讲的挺清楚的
-//  首先用照相机前，不要忘了向系统声明一些权限。这种是无论你用那种API都不可避免的一些代码
-//  <uses-permission android:name="android.permission.CAMERA" />
-//  <uses-feature android:name="android.hardware.camera" />
-//  <uses-feature android:name="android.hardware.camera.autofocus" />
+    Android系统最初提供了两种比较简单的方式可以用于开发相机，其中第一种方式就是直接开一个Intent跳转到一个专门的相机页面进行拍摄。另外一种是利用API1中的Camera进行开发。
+    这个Camera的应用我自己也写了一个相对简单的demo，整体来说是相对简单的。这种方式是比较适用于相机定制，或者开发相机特殊功能的界面，例如对照片做裁剪，滤镜处理，添加贴纸，表情，地点标签等等。
+    对于我们自己控制相机，以下是几个需要的角料
+    - 使用camera来控制相机
+    - 使用surfaceView 或者 TextureView 里展现相机采集的图像
+    - 使用SurfaceHolder来控制surface的尺寸和格式，修改surface的像素，监视surface的变化
+    - 通过SurfaceHolder.Callback来监听surface的变化。
 
-//    Android系统最初提供了两种比较简单的方式可以用于开发相机，其中第一种方式就是直接开一个Intent跳转到一个专门的相机页面进行拍摄。另外一种是利用API1中的Camera进行开发。
-//    这个Camera的应用我自己也写了一个相对简单的demo，整体来说是相对简单的。这种方式是比较适用于相机定制，或者开发相机特殊功能的界面，例如对照片做裁剪，滤镜处理，添加贴纸，表情，地点标签等等。
-//    对于我们自己控制相机，以下是几个需要的角料
-//    - 使用camera来控制相机
-//    - 使用surfaceView 或者 TextureView 里展现相机采集的图像
-//    - 使用SurfaceHolder来控制surface的尺寸和格式，修改surface的像素，监视surface的变化
-//    - 通过SurfaceHolder.Callback来监听surface的变化。
+    api说明
+    Camera为最主要的类，用于管理和操作camera资源，它提供了完整的相机底层接口，支持相机资源切换，设置预览拍摄尺寸，指定光圈，曝光聚焦等相关参数获取预览，拍摄帧数等功能
+    主要方法有以下：
+    open() 获取一个Camera实例
+    setPreviewDisplay(SyrfaceHolder), 绑定绘制预览图像的surface。 Surface指向屏幕窗口原始图像缓冲区(raw buffer)的一个句柄，通过它可以获得这个屏幕上相对的canvas，进而在屏幕上完成绘制
+    view的工作。通过SurfaceHolder可以将Camera和Surface连接起来，当camera和surface连接起来之后，camera获得的预览数据就可以通过surface展示在屏幕上了
+    setPrameters()设置相机参数，包括前后摄像头，闪光灯模式聚焦模式预览和拍照尺寸等
+    startPreview()开始预览，将camera硬件传来的数据显示在绑定的surface上。startPreview()这个方法实际上是可以重复调用多次的。这个别怕。
+    stopPreview()停止预览，关闭底层Camera的帧数据传递以及在surface上的绘制
+    release()释放camera实例。
+    enableShutterSound(boolean enable) 开启或者关闭拍照时候的喀嚓声，默认是开启的。我自己代码测出来的
+    setDisplayOrientation(90) 设置预览的角度, 这个角度值是90度的倍数，不能瞎给
+    takePicture(Camera.ShutterCallback shutter, Camera.PictureCallback raw, Camera.PictureCallback jpeg): 这个是实现相机拍照的主要方法，包含三个回调参数， Shutter是按下快门时的回调
+    raw是获取拍照原始数据的回调， jpeg获取通过压缩成jpg格式的图像回调。当我们调用了takePicture之后预览的图片实际上是停止的，如果你还想触发拍照的话，就得重新调用startPreview()方法
+    autoFocuse(AutofoucuseCallback)自动对焦相关，这个方法只能在SurfaceView准备好之后调用，并且经过我自己的测试，这个方法使用的范围更小，是startPreview之后调用。否则会崩溃哈.这个方法是干嘛用的呢，
+    表面意思当然是对焦哈，但是仍然有许多我们需要学习的点。就是自动对焦，和对焦不是一码事。。。。我这次研究拍照也就是为了研究自动对焦怎么弄来着。但是这个方法如果好好研究，那得从setPrameters的设置模式说起了。(附， Parameter是一个稍微复杂的设置类，这里面的每一个特性我们都应该好好熟悉一番！)
+    自动对焦指的是自动计算这个焦点而已，，他没有"对上"这个动作。如果你想要对，，那你得调用autoFocuse方法才行。当然你自己调不调用autoFocus这个方法取决于你的需求，另外的一点是，还取决于你的模式。但是我认为
+    无论你模式怎么设置，似乎这个方法的奏效性优先级是最高的
+    拿我这次要解决的问题为例，我的目的是尽可能的使照片拍着比较清晰，所以我的方案是在自动对焦完成之后，再捕获照片，那么我首先需要调用
+    mCamera1.cancelAutoFocus();  //取消自动对焦
+    Camera.Parameters parameters = mCamera1.getParameters(); //获取配置，这个配置必须从mCamera1里面获取，以免set错对象之前的配置被覆盖，导致效果不行
+    parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO); //设置为自动对焦模式， Parameters可以设置很多东西，有时间我们好好研究一下
+    mCamera1.setParameters(parameters);
+    mCamera1.autoFocus(new Camera.AutoFocusCallback(){...}); //调用自动对焦，等对焦完成之后会回调出来。此时你再执行拍照的逻辑，拍下来的图片会更加清晰
 
-//    api说明
-//    Camera为最主要的类，用于管理和操作camera资源，它提供了完整的相机底层接口，支持相机资源切换，设置预览拍摄尺寸，指定光圈，曝光聚焦等相关参数获取预览，拍摄帧数等功能
-//    主要方法有以下：
-//    open() 获取一个Camera实例
-//    setPreviewDisplay(SyrfaceHolder), 绑定绘制预览图像的surface。 Surface指向屏幕窗口原始图像缓冲区(raw buffer)的一个句柄，通过它可以获得这个屏幕上相对的canvas，进而在屏幕上完成绘制
-//    view的工作。通过SurfaceHolder可以将Camera和Surface连接起来，当camera和surface连接起来之后，camera获得的预览数据就可以通过surface展示在屏幕上了
-//    setPrameters()设置相机参数，包括前后摄像头，闪光灯模式聚焦模式预览和拍照尺寸等
-//    startPreview()开始预览，将camera硬件传来的数据显示在绑定的surface上。startPreview()这个方法实际上是可以重复调用多次的。这个别怕。
-//    stopPreview()停止预览，关闭底层Camera的帧数据传递以及在surface上的绘制
-//    release()释放camera实例。
-//    enableShutterSound(boolean enable) 开启或者关闭拍照时候的喀嚓声，默认是开启的。我自己代码测出来的
-//    setDisplayOrientation(90) 设置预览的角度, 这个角度值是90度的倍数，不能瞎给
-//    takePicture(Camera.ShutterCallback shutter, Camera.PictureCallback raw, Camera.PictureCallback jpeg): 这个是实现相机拍照的主要方法，包含三个回调参数， Shutter是按下快门时的回调
-//    raw是获取拍照原始数据的回调， jpeg获取通过压缩成jpg格式的图像回调。当我们调用了takePicture之后预览的图片实际上是停止的，如果你还想触发拍照的话，就得重新调用startPreview()方法
-//    autoFocuse(AutofoucuseCallback)自动对焦相关，这个方法只能在SurfaceView准备好之后调用。否则会崩溃哈
+    Camera关于录像相关的接口。我在试的过程中，发现有，reconnect， unLock之类的方法，不知道怎么用。好在文档给的足够好。原来他们是和录像相关的代码
+    unLock()调用可以允许媒体通道介入camera入口
+    MediaRecorder可以与Camera之间相互联系上，用的是MediaRecorder setCamera()方法将句柄传入
+    reconnect() 重新请求lock camera， 没看懂哈这里
+    重新startreview可以重新开始录像
 
-//    Camera关于录像相关的接口。我在试的过程中，发现有，reconnect， unLock之类的方法，不知道怎么用。好在文档给的足够好。原来他们是和录像相关的代码
-//    unLock()调用可以允许媒体通道介入camera入口
-//    MediaRecorder可以与Camera之间相互联系上，用的是MediaRecorder setCamera()方法将句柄传入
-//    reconnect() 重新请求lock camera， 没看懂哈这里
-//    重新startreview可以重新开始录像
+    关于autoFocusMode
+    FocusMode的常量定义在 Camera.Parameters 类中，这个压根就不需要记就应该觉得会是这里的。并且这个类提供了各种设置，和各种查询入口。我觉得碰到不懂的时候好好看看这个类兴许有我们想要的
+    FOCUS_MODE_AUTO: 自动对焦模式，应用需要调用 autoFocus(Camera.AutoFocusCallback) 开始进行对焦，只会对焦一次，对焦成功会有回调。 这个方法的优先级我认为是很高的哈
+    FOCUS_MODE_INFINITY: 无穷对焦模式，应用场景是比较少的
+    FOCUS_MODE_MACRO: 特写镜头对焦模式，应用需要调用autoFocus(AutoFocusCallback)开始对焦。个人感觉这是微距。但我没有时间试了
+    FOCUS_MODE_FIXED: 固定焦点模式，焦点在不可调用时都是这种模式，如果Camera能够自动对焦，这种模式会固定焦点，通常应用于超焦距对焦，这种模式是不能调用autFocus(AutoFocusCallback)的
+    FOCUS_MODE_EDOF: 扩展景深模式，不知道是个啥！
+    FOCUS_MODE_CONTINUOUS_VIDEO: 连续自动对焦模式，主要用于视频录制的 过程中，Camera会不断的尝试聚焦，这是录制视频时对焦模式的最好选择，在设置了Camera的参数后就开始自动对焦，但是调用takePicture时不一定对焦完成
+    FOCUS_MODE_CONTINUOUS_PICTURE: 这种模式是对FOCUS_MODE_CONTINUOUS_VIDEO模式的自动对焦应用于拍照的扩展，Camera会不停的尝试连续对焦，对焦频率会比FOCUS_MODE_CONTINUOUS_VIDEO频繁， 当设置了camera参数后开始对焦
+
+ 注意如果重新开始自动对焦，首先需要调用cancelAutoFocus，然后再设置自动对焦模式，再调用autoFocus(AutoFocusCallback)，如果当前正在对焦扫描，fucus回调函数将在它完成对焦时回调。如果没有正在对焦扫描，将立即放回。
+ autoFocus函数调用后对焦区域是固定的，如果应用想重新开启自动连续对焦，需要首先调动cancelAutoFocus，重新开始预览无法开启自动连续对焦，需要重新autoFocus， 如果想要停止自动连续对焦，应用可以修改对焦模式，
 
 
+    SurfaceView
+    用于绘制相机预览图像的类，提供给用户实时的预览图像。普通的View以及派生类实际上是共享一个Surface的所有的绘制都是在UI线程上进行。而SurfaceView是一个比较特殊的view，它并不与其他view共享一个Surface，
+    而是内部持有了一个独立的surface， SurfaceView负责管理这个surface的格式，尺寸以及显示位置。由于UI线程同时还要处理其他的交互逻辑，因此对view的帧率和速度是无法保证的，而surfaceView由于持有
+    一个独立的Surface，因而可以在一个独立的线程中进行绘制，因此可以提供更高的帧率。自定义相机的预览图像由于对更新速度和帧率的要求比较高，所以适合用surfaceView来展示。
 
+    SurfaceHolder
+    SurfaceHolder是控制Surface的一个抽象接口，注意这里，是Surface而不是SurfaceView哈，它能够控制surface的尺寸和格式，修改surface的像素，监视surface的变化等等，SurfaceHolder的
+    典型应用就是用于SurfaceView中，SurfaceView通过getHolder获取一个surfaceHolder实例，通过后者监听管理surface的状态
+    SurfaceHolder.Callback 接口，负责监听Surface的状态和变化，
+    surfaceCreated(SurfaceHolder holder) 在surface被创建之后立即被调用，在开发自定义相机时，可以重载这个方法，调用camera.open() 和 camera.setPreviewDisplay(SurfaceHolder holder)
+    来实现获取相机资源，连接camera和Surface等操作
+    surfaceChanged(SurfaceHolder holder, int format, int width, int height), 在surface发生format或者size变化时调用，在开发自定义相机的时候，可以通过重载这个方法来执行camera。startPrivew来开启相机预览
+    使得camera的帧数据可以传递给surface，从而实时的展示相机预览图像
+    surfaceDestoryed(SurfaceHolder holder), 在surface被销毁之前，这个方法会被调用，在开发自定义相机时，可以通过重载这个方法调用camera.stopPreview(), camera.release()等
+    来实现停止相机预览以及释放资源等操作。
 
-//    SurfaceView
-//    用于绘制相机预览图像的类，提供给用户实时的预览图像。普通的View以及派生类实际上是共享一个Surface的所有的绘制都是在UI线程上进行。而SurfaceView是一个比较特殊的view，它并不与其他view共享一个Surface，
-//    而是内部持有了一个独立的surface， SurfaceView负责管理这个surface的格式，尺寸以及显示位置。由于UI线程同时还要处理其他的交互逻辑，因此对view的帧率和速度是无法保证的，而surfaceView由于持有
-//    一个独立的Surface，因而可以在一个独立的线程中进行绘制，因此可以提供更高的帧率。自定义相机的预览图像由于对更新速度和帧率的要求比较高，所以适合用surfaceView来展示。
-
-//    SurfaceHolder
-//    SurfaceHolder是控制Surface的一个抽象接口，注意这里，是Surface而不是SurfaceView哈，它能够控制surface的尺寸和格式，修改surface的像素，监视surface的变化等等，SurfaceHolder的
-//    典型应用就是用于SurfaceView中，SurfaceView通过getHolder获取一个surfaceHolder实例，通过后者监听管理surface的状态
-//    SurfaceHolder.Callback 接口，负责监听Surface的状态和变化，
-//    surfaceCreated(SurfaceHolder holder) 在surface被创建之后立即被调用，在开发自定义相机时，可以重载这个方法，调用camera.open() 和 camera.setPreviewDisplay(SurfaceHolder holder)
-//    来实现获取相机资源，连接camera和Surface等操作
-//    surfaceChanged(SurfaceHolder holder, int format, int width, int height), 在surface发生format或者size变化时调用，在开发自定义相机的时候，可以通过重载这个方法来执行camera。startPrivew来开启相机预览
-//    使得camera的帧数据可以传递给surface，从而实时的展示相机预览图像
-//    surfaceDestoryed(SurfaceHolder holder), 在surface被销毁之前，这个方法会被调用，在开发自定义相机时，可以通过重载这个方法调用camera.stopPreview(), camera.release()等
-//    来实现停止相机预览以及释放资源等操作。
-
-//    private void test() {
-//        mCamera1.
-//    }
-
+    private void test() {
+        mCamera1.
+    }
+**/
 
     @Override
     protected int getLayoutId() {
@@ -142,6 +162,9 @@ public class CameraUsingFra extends BaseFragment implements View.OnClickListener
 
         mCamera1.enableShutterSound(true);
         mCamera1.setDisplayOrientation(90);
+        Camera.Parameters parameters = mCamera1.getParameters();
+        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+        mCamera1.setParameters(parameters);
     }
 
     private void releaseCamera() {
@@ -161,24 +184,35 @@ public class CameraUsingFra extends BaseFragment implements View.OnClickListener
     }
 
     private void takePhoto() {
-        mCamera1.takePicture(new Camera.ShutterCallback() {
-                                 @Override
-                                 public void onShutter() {
-                                     MCLLog.v(TAG, "");
-                                 }
-                             },
-                new Camera.PictureCallback() {
-                    @Override
-                    public void onPictureTaken(byte[] bytes, Camera camera) {
-                        MCLLog.v(TAG, "");
-                    }
-                },
-                new Camera.PictureCallback() {
-                    @Override
-                    public void onPictureTaken(byte[] bytes, Camera camera) {
-                        MCLLog.v(TAG, "");
-                    }
-                });
+        mCamera1.cancelAutoFocus();
+        Camera.Parameters parameters = mCamera1.getParameters();
+        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+        mCamera1.setParameters(parameters);
+        mCamera1.autoFocus(new Camera.AutoFocusCallback() {
+            @Override
+            public void onAutoFocus(boolean b, Camera camera) {
+                MCLLog.i(TAG, "自动对焦了，b=" + b);
+                mCamera1.takePicture(new Camera.ShutterCallback() {
+                                         @Override
+                                         public void onShutter() {
+                                             MCLLog.v(TAG, "");
+                                         }
+                                     },
+                        new Camera.PictureCallback() {
+                            @Override
+                            public void onPictureTaken(byte[] bytes, Camera camera) {
+                                MCLLog.v(TAG, "");
+                            }
+                        },
+                        new Camera.PictureCallback() {
+                            @Override
+                            public void onPictureTaken(byte[] bytes, Camera camera) {
+                                MCLLog.v(TAG, "");
+                            }
+                        });
+            }
+        });
+
     }
 
 }

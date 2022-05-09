@@ -52,12 +52,6 @@ public class ViewPreview extends FrameLayout implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         MCLLog.v(TAG, "");
-        mCamera.autoFocus(new Camera.AutoFocusCallback() {
-            @Override
-            public void onAutoFocus(boolean b, Camera camera) {
-                MCLLog.i(TAG, "b=" + b);
-            }
-        });
     }
 
     @Override
@@ -80,7 +74,6 @@ public class ViewPreview extends FrameLayout implements SurfaceHolder.Callback {
 
 
         mCamera.startPreview();
-
     }
 
     @Override
