@@ -1,9 +1,34 @@
 package com.example.forev.mycodelibrary.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCaptureSession;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraDevice;
+import android.hardware.camera2.CameraManager;
+import android.hardware.camera2.CaptureFailure;
+import android.hardware.camera2.CaptureRequest;
+import android.hardware.camera2.CaptureResult;
+import android.hardware.camera2.TotalCaptureResult;
+import android.hardware.camera2.params.MeteringRectangle;
+import android.hardware.camera2.params.StreamConfigurationMap;
+import android.media.ImageReader;
+import android.os.Build;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.util.Log;
+import android.util.Size;
 import android.view.Surface;
 import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -14,20 +39,39 @@ import com.example.forev.mycodelibrary.R;
 import com.example.forev.mycodelibrary.utils.MCLLog;
 import com.example.forev.mycodelibrary.view.ViewPreview;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 /**
  * @author caoyl
  * 总结关于摄像头的用法的界面类
  */
 public class CameraUsingFra extends BaseFragment implements View.OnClickListener {
     private static final String TAG = "CameraUsingFra";
+    private static final int USING_TYPE_CAMERA1 = 1;
+    private static final int USING_TYPE_CAMERA2 = 2;
+
     private Camera mCamera1;
     private ViewPreview mPreview;
     private FrameLayout mPreviewContainer;
     private TextView mTakePhotoBt;
+
+    private CameraManager mCameraManager;
+    private Handler mCamera2Handler;
+    private CameraDevice mCameraDevice;
+    private CameraCaptureSession mCameraCaptureSession; //CameraCaptureSession主要就是负责建立一路和相机进行交互的会话，需要通过CameraDevice来创建。 CameraDevice里面有很多创建Builder session的方法。全部封装好了！
+    private CaptureRequest.Builder mCameraReuqestBuilder;
+    private CaptureRequest.Builder mPreviewRequestBuilder;
+    private String mCameraId;
+    private CaptureRequest mPreviewRequest;
+    private Size mPhotoSize;
+    private Surface mImageReaderSurface;
+    private Surface mPreviewSurface;
+    private int mCurrentUseType;
+    private CameraCharacteristics mCameraCharacteristics;
+
 /**
     http://www.android-doc.com/reference/android/hardware/Camera.html 这个地址里面讲的挺清楚的
   首先用照相机前，不要忘了向系统声明一些权限。这种是无论你用那种API都不可避免的一些代码
@@ -127,19 +171,31 @@ public class CameraUsingFra extends BaseFragment implements View.OnClickListener
         mTakePhotoBt = mRootView.findViewById(R.id.mTakePhoto);
         mRootView.setOnClickListener(this);
         mRootView.findViewById(R.id.mOriginUsing).setOnClickListener(this);
+        mRootView.findViewById(R.id.mCamera2Using).setOnClickListener(this);
         mTakePhotoBt.setOnClickListener(this);
+
+        HandlerThread handlerThread = new HandlerThread("Camera2Test");
+        handlerThread.start();
+        mCamera2Handler = new Handler(handlerThread.getLooper());
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onClick(View v){
         MCLLog.i(TAG, "User click v=" + v);
         switch (v.getId()) {
             case R.id.mOriginUsing:
+                mCurrentUseType = USING_TYPE_CAMERA1;
                 getCameraInstance();
                 createPreview();
                 break;
+            case R.id.mCamera2Using:
+                // 采用Camera2的API
+                mCurrentUseType = USING_TYPE_CAMERA2;
+                getCamera2Instance();
+                break;
             case R.id.mTakePhoto:
-                mCamera1.startPreview();
                 takePhoto();
                 break;
             default:
@@ -183,36 +239,325 @@ public class CameraUsingFra extends BaseFragment implements View.OnClickListener
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void takePhoto() {
-        mCamera1.cancelAutoFocus();
-        Camera.Parameters parameters = mCamera1.getParameters();
-        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
-        mCamera1.setParameters(parameters);
-        mCamera1.autoFocus(new Camera.AutoFocusCallback() {
-            @Override
-            public void onAutoFocus(boolean b, Camera camera) {
-                MCLLog.i(TAG, "自动对焦了，b=" + b);
-                mCamera1.takePicture(new Camera.ShutterCallback() {
-                                         @Override
-                                         public void onShutter() {
-                                             MCLLog.v(TAG, "");
-                                         }
-                                     },
-                        new Camera.PictureCallback() {
-                            @Override
-                            public void onPictureTaken(byte[] bytes, Camera camera) {
-                                MCLLog.v(TAG, "");
-                            }
-                        },
-                        new Camera.PictureCallback() {
-                            @Override
-                            public void onPictureTaken(byte[] bytes, Camera camera) {
-                                MCLLog.v(TAG, "");
-                            }
-                        });
+        if(USING_TYPE_CAMERA1 == mCurrentUseType) {
+            mCamera1.startPreview();
+            mCamera1.cancelAutoFocus();
+            Camera.Parameters parameters = mCamera1.getParameters();
+            parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+            mCamera1.setParameters(parameters);
+            mCamera1.autoFocus(new Camera.AutoFocusCallback() {
+                @Override
+                public void onAutoFocus(boolean b, Camera camera) {
+                    MCLLog.i(TAG, "自动对焦了，b=" + b);
+                    mCamera1.takePicture(new Camera.ShutterCallback() {
+                                             @Override
+                                             public void onShutter() {
+                                                 MCLLog.v(TAG, "");
+                                             }
+                                         },
+                            new Camera.PictureCallback() {
+                                @Override
+                                public void onPictureTaken(byte[] bytes, Camera camera) {
+                                    MCLLog.v(TAG, "");
+                                }
+                            },
+                            new Camera.PictureCallback() {
+                                @Override
+                                public void onPictureTaken(byte[] bytes, Camera camera) {
+                                    MCLLog.v(TAG, "");
+                                }
+                            });
+                }
+            });
+        } else {
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    mCameraCaptureSession.stopRepeating();
+                    mCameraReuqestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
+                    mCameraReuqestBuilder.set(CaptureRequest.JPEG_ORIENTATION, 90);
+                    mCameraReuqestBuilder.addTarget(mImageReaderSurface);
+
+                    if (null != mCameraCharacteristics) {
+                        MCLLog.i(TAG, "开始对焦了！");
+                        MeteringRectangle meteringRectangle = calcTapAreaForCamera2(mCameraCharacteristics, 20, 1);
+                        MeteringRectangle[] rectangles = new MeteringRectangle[]{meteringRectangle};
+                        mCameraReuqestBuilder.set(CaptureRequest.CONTROL_AF_MODE,CaptureRequest.CONTROL_AF_MODE_AUTO);
+                        mCameraReuqestBuilder.set(CaptureRequest.CONTROL_AE_REGIONS, rectangles);
+                        mCameraReuqestBuilder.set(CaptureRequest.CONTROL_AF_REGIONS, rectangles);
+                        try {
+                            mCameraCaptureSession.setRepeatingRequest(mCameraReuqestBuilder.build(), null, null);
+                        } catch (CameraAccessException e) {
+                            e.printStackTrace();
+                        }
+
+                        mCameraReuqestBuilder.set(CaptureRequest.CONTROL_AF_TRIGGER, CaptureRequest.CONTROL_AF_TRIGGER_START);
+
+                        try {
+                            Log.i(TAG, "take photo with autofocus");
+                            mCameraCaptureSession.capture(mCameraReuqestBuilder.build(), new CameraCaptureSession.CaptureCallback() {
+                                @Override
+                                public void onCaptureStarted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, long timestamp, long frameNumber) {
+                                    super.onCaptureStarted(session, request, timestamp, frameNumber);
+                                }
+
+                                @Override
+                                public void onCaptureProgressed(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull CaptureResult partialResult) {
+                                    super.onCaptureProgressed(session, request, partialResult);
+                                }
+
+                                @Override
+                                public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
+                                    super.onCaptureCompleted(session, request, result);
+                                    try {
+                                        mCameraCaptureSession.setRepeatingRequest(mPreviewRequest, null, null);
+                                    } catch (CameraAccessException e) {
+                                        e.printStackTrace();
+                                        MCLLog.e(TAG, "e=" + e);
+                                    }
+                                }
+
+                                @Override
+                                public void onCaptureFailed(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull CaptureFailure failure) {
+                                    super.onCaptureFailed(session, request, failure);
+                                }
+
+                                @Override
+                                public void onCaptureSequenceCompleted(@NonNull CameraCaptureSession session, int sequenceId, long frameNumber) {
+                                    super.onCaptureSequenceCompleted(session, sequenceId, frameNumber);
+                                }
+
+                                @Override
+                                public void onCaptureSequenceAborted(@NonNull CameraCaptureSession session, int sequenceId) {
+                                    super.onCaptureSequenceAborted(session, sequenceId);
+                                }
+
+                                @Override
+                                public void onCaptureBufferLost(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull Surface target, long frameNumber) {
+                                    super.onCaptureBufferLost(session, request, target, frameNumber);
+                                }
+                            }, null);
+                        } catch (CameraAccessException e){
+                            e.printStackTrace();
+                        }
+
+                    } else {
+                        Log.e(TAG, "没有对焦  mCameraCharacteristics=null!");
+//                        origin takePhoto
+                        CaptureRequest captureRequest  = mCameraReuqestBuilder.build();
+
+                        mCameraCaptureSession.stopRepeating();
+                        // todo
+                        mCameraCaptureSession.capture(captureRequest, null, null);
+                    }
+                }
+
+            } catch (CameraAccessException e) {
+                e.printStackTrace();
+                Log.e(TAG, "相机访问异常");
+            } catch (Exception e) {
+                Log.e(TAG, "e=" + e);
             }
-        });
+        }
 
     }
 
+
+    /**
+     * 一定要在surface创建完成之后openCamera？？？
+     */
+    @SuppressLint("MissingPermission")
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void getCamera2Instance() {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mCameraManager = (CameraManager) getActivity().getSystemService(Context.CAMERA_SERVICE);
+            }
+
+            CameraCharacteristics characteristics = null;
+            String[] deviceList = mCameraManager.getCameraIdList();  // 0, 1
+            MCLLog.i(TAG, "deviceList=" + Arrays.toString(deviceList));
+            mCameraId = deviceList[0];
+
+            characteristics = mCameraManager.getCameraCharacteristics(mCameraId);
+            StreamConfigurationMap configurationMap = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+            List<Size> sizes = Arrays.asList(configurationMap.getOutputSizes(SurfaceTexture.class));
+            MCLLog.i(TAG, "size=" + sizes);
+            Collections.sort(sizes, new Comparator<Size>() {
+                @Override
+                public int compare(Size o1, Size o2) {
+                    return o1.getWidth() * o1.getHeight() - o2.getWidth() * o2.getHeight();
+                }
+            });
+            for (Size size : sizes) {
+                if (size.getWidth() == 1280 && size.getHeight() == 960) {
+                    mPhotoSize = size;
+                    MCLLog.v(TAG, "mPhotoSize=" + mPhotoSize);
+                    break;
+                }
+            }
+
+            if (mPhotoSize == null) {
+                //TODO CaoYl 这里会越界吗
+                mPhotoSize = sizes.get(15);
+                MCLLog.v(TAG, "mPhotoSize=" + mPhotoSize);
+            }
+            Collections.reverse(sizes);
+
+
+            final SurfaceView surfaceView = new SurfaceView(getContext());
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            surfaceView.setLayoutParams(params);
+            mPreviewContainer.addView(surfaceView);
+
+            mPreviewSurface = surfaceView.getHolder().getSurface();
+
+            //初始化拍照 ImageReader
+            ImageReader photoReader = ImageReader.newInstance(mPhotoSize.getWidth(), mPhotoSize.getHeight(), ImageFormat.JPEG, 2);
+            photoReader.setOnImageAvailableListener(new ImageReader.OnImageAvailableListener() {
+                @Override
+                public void onImageAvailable(ImageReader imageReader) {
+                    MCLLog.i(TAG, "");
+                }
+            }, null);
+            mImageReaderSurface = photoReader.getSurface();
+
+            surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+                @Override
+                public void surfaceCreated(SurfaceHolder surfaceHolder) {
+                    try {
+                        MCLLog.v(TAG, "");
+                        mCameraManager.openCamera(mCameraId, new CameraDevice.StateCallback() {
+                            @Override
+                            public void onOpened(@NonNull CameraDevice cameraDevice) {
+                                MCLLog.v(TAG, "");
+                                mCameraDevice = cameraDevice;
+
+                                try {
+                                    mPreviewRequestBuilder = CameraUsingFra.this.mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW); //这里的参数特别多
+                                    mPreviewRequestBuilder.addTarget(mPreviewSurface);
+                                    mPreviewRequest = mPreviewRequestBuilder.build();
+                                    cameraDevice.createCaptureSession(Arrays.asList(mPreviewSurface, mImageReaderSurface), new CameraCaptureSession.StateCallback() {
+                                        @Override
+                                        public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
+                                            MCLLog.v(TAG, "");
+
+                                            mCameraCaptureSession = cameraCaptureSession;
+
+                                            try {
+                                                mCameraCaptureSession.setRepeatingRequest(mPreviewRequest, new CameraCaptureSession.CaptureCallback() {
+                                                    @Override
+                                                    public void onCaptureStarted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, long timestamp, long frameNumber) {
+                                                        super.onCaptureStarted(session, request, timestamp, frameNumber);
+                                                    }
+
+                                                    @Override
+                                                    public void onCaptureProgressed(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull CaptureResult partialResult) {
+                                                        super.onCaptureProgressed(session, request, partialResult);
+                                                    }
+
+                                                    @Override
+                                                    public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
+                                                        super.onCaptureCompleted(session, request, result);
+                                                    }
+
+                                                    @Override
+                                                    public void onCaptureFailed(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull CaptureFailure failure) {
+                                                        super.onCaptureFailed(session, request, failure);
+                                                    }
+
+                                                    @Override
+                                                    public void onCaptureSequenceCompleted(@NonNull CameraCaptureSession session, int sequenceId, long frameNumber) {
+                                                        super.onCaptureSequenceCompleted(session, sequenceId, frameNumber);
+                                                    }
+
+                                                    @Override
+                                                    public void onCaptureSequenceAborted(@NonNull CameraCaptureSession session, int sequenceId) {
+                                                        super.onCaptureSequenceAborted(session, sequenceId);
+                                                    }
+
+                                                    @Override
+                                                    public void onCaptureBufferLost(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull Surface target, long frameNumber) {
+                                                        super.onCaptureBufferLost(session, request, target, frameNumber);
+                                                    }
+                                                }, null);
+                                            } catch (CameraAccessException e) {
+                                                e.printStackTrace();
+                                                MCLLog.i(TAG, "e=" + e);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
+                                            MCLLog.i(TAG, "");
+                                        }
+                                    }, null);
+                                } catch (CameraAccessException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onDisconnected(@NonNull CameraDevice cameraDevice) {
+
+                            }
+
+                            @Override
+                            public void onError(@NonNull CameraDevice cameraDevice, int i) {
+
+                            }
+                        }, null);
+
+                        mCameraCharacteristics = mCameraManager.getCameraCharacteristics(mCameraId);
+                    } catch (CameraAccessException e) {
+                        e.printStackTrace();
+                        MCLLog.e(TAG, "e=" + e);
+                    }
+                }
+
+                @Override
+                public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+
+                }
+            });
+        } catch (Exception e) {
+            MCLLog.e(TAG, "e=" + e);
+        }
+
+
+    }
+
+    private MeteringRectangle calcTapAreaForCamera2(CameraCharacteristics c, int areaSize, int
+            weight) {
+        Rect rect = c.get(CameraCharacteristics.SENSOR_INFO_ACTIVE_ARRAY_SIZE);
+        Log.d(TAG, "active Rect:" + rect.toString());
+        Rect newRect;
+        int leftPos, topPos;
+        leftPos = (rect.left + rect.right) / 2;
+        topPos = (rect.top + rect.bottom) / 2;
+        int left = clamp(leftPos - areaSize, 0, rect.right);
+        int top = clamp(topPos - areaSize, 0, rect.bottom);
+        int right = clamp(leftPos + areaSize, leftPos, rect.right);
+        int bottom = clamp(topPos + areaSize, topPos, rect.bottom);
+        newRect = new Rect(left, top, right, bottom);
+        Log.d(TAG, newRect.toString());
+        // 构造MeteringRectangle
+        return new MeteringRectangle(newRect, weight);
+    }
+
+    private int clamp(int x, int min, int max) {
+        if (x > max) {
+            return max;
+        }
+        if (x < min) {
+            return min;
+        }
+        return x;
+    }
 }

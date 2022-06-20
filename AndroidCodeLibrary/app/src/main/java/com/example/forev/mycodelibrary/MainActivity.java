@@ -25,7 +25,7 @@ public class MainActivity extends BaseActivity{
 
     @OnClick({R.id.animation_btn, R.id.view, R.id.mSelectFileBtn, R.id.mReflex, R.id.mPermissionRequest,
     R.id.mHookTest, R.id.mServiceTest, R.id.mProviderTest,R.id.mAlgorithmTest,
-    R.id.mSkill, R.id.mThread, R.id.mMemory, R.id.mServer, R.id.mKotlin, R.id.mSurface})
+    R.id.mSkill, R.id.mThread, R.id.mMemory, R.id.mServer, R.id.mKotlin, R.id.mSurface, R.id.mTencentUpload})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.animation_btn:
@@ -69,6 +69,9 @@ public class MainActivity extends BaseActivity{
                 break;
             case R.id.mSurface:
                 openActivity(SurfaceTestAct.class);
+                break;
+            case R.id.mTencentUpload:
+                openActivity(TencentUploadActivity.class);
                 break;
         }
     }
