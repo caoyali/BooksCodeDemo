@@ -15,7 +15,6 @@
 https://www.doxygen.nl/manual/commands.html#cmdarg
 
 将配置中   JAVADOC_AUTOBRIEF  改为true 
-￼
 这里会加很多说明， 会把你在函数上面的说明都加上
 对于参数解析的第二种写法，也可以
 public void init(InitConfig initConfig /**<初始化信息， 详见{@link InitConfig}*/, InitSDKCallback initSDKCallback/**<回调句柄，初始化结果会通过这个参数回调出去*/)
