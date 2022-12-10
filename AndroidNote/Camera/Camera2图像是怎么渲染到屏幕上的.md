@@ -132,11 +132,13 @@ note right of c : 程序员代码只需要将两者协调好即可！\n我们可
   ```puml
   @startuml
     :opengl创建一个id;
-    :SurfaceTeture用此id初始化;
+    :SurfaceTexture用此id初始化;
     :开始预览的时候，用SurfaceTexture创建一个Surface，
     Surface surface = new Surface(刚才初始化的那个SurfaceTeture)
     ;
     :将新建的Surface喂给相机体系！ 这段代码行数不少反正就是这个道理就是了;
   @enduml
   ```
+  
+  # 将整个流程的代码写下来
   

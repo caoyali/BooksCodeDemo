@@ -47,7 +47,7 @@ int main() {
     int * p_updates; //地址的初始化，就是一个星，不用解释为什么这里会出现个星，死记硬背就成了
     p_updates = &updates;
     cout << " upsates = " << updates << " p_updates=" << p_updates << " *p_updates=" << * p_updates << endl; 
-    *p_updates = *p_updates + 1;
+    *p_updates = *p_updates + 1;  //地址里面的值进行修改，改为7
     cout << "把地址内容取出，加了1之后看看：updates=" << updates << " *p_updates= " << *p_updates << endl;
 
     p_updates += 1;
