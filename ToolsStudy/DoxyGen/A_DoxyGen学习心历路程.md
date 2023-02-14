@@ -2,9 +2,12 @@
 
 这个别调研了，王老板推荐用  doxygen   搞明白这个出的文档更好
 先用这个 命令
- doxygen -g <config-file> 生成一个配置文件
 
- doxygen 你的配置文件名  就生成sdk说明文档了
+```
+doxygen -g <config-file> 生成一个配置文件
+doxygen 你的配置文件名  就生成sdk说明文档了
+```
+ 
 这个配置文件可以配置一些东西
 我目前碰到的问题是
 1 我的排版特别丑
